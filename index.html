@@ -3,381 +3,221 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Patrick Luo | Blog & Portfolio</title>
+    <title>Patrick Luo | Portfolio</title>
     <meta
       name="description"
-      content="Personal blog and portfolio for Patrick Luo, covering finance, math, and coding notes."
+      content="Portfolio for Patrick Luo with experience in software, finance, and full-stack projects."
     />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+        background: radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.08), transparent 35%),
+          radial-gradient(circle at 85% 5%, rgba(56, 189, 248, 0.08), transparent 32%),
+          linear-gradient(145deg, #0b0c12, #0d1020 60%, #0b0c12);
+        color: #e5e7eb;
+      }
+      .bg-grid {
+        background-image: linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+        background-size: 36px 36px;
+      }
+      .card {
+        position: relative;
+        overflow: hidden;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 18px;
+        background: linear-gradient(130deg, rgba(124, 58, 237, 0.28), rgba(56, 189, 248, 0.2), rgba(167, 139, 250, 0.2));
+        opacity: 0.7;
+        filter: blur(16px);
+        z-index: 0;
+      }
+      .card > * {
+        position: relative;
+        z-index: 1;
+      }
+      .mono {
+        font-family: "IBM Plex Mono", monospace;
+      }
+    </style>
   </head>
-  <body class="min-h-screen bg-slate-950 text-slate-50">
-    <div class="relative isolate overflow-hidden">
-      <div class="absolute inset-0">
-        <div
-          class="h-full w-full bg-cover bg-center"
-          style="background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1600&q=80');"
-        ></div>
-        <div class="absolute inset-0 bg-slate-950/75"></div>
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/65 to-slate-950"
-        ></div>
+  <body class="min-h-screen bg-[#0b0c12] text-slate-100">
+    <div class="pointer-events-none fixed inset-0 bg-grid opacity-40"></div>
+    <div class="fixed inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(124,58,237,0.12),transparent_25%),radial-gradient(circle_at_80%_10%,rgba(56,189,248,0.12),transparent_25%),radial-gradient(circle_at_50%_70%,rgba(16,185,129,0.08),transparent_30%)]"></div>
+
+    <!-- Navbar -->
+    <header class="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6 lg:px-10">
+      <div class="flex items-center gap-3">
+        <span class="h-2.5 w-2.5 rounded-full bg-purple-400 shadow-[0_0_0_8px_rgba(168,85,247,0.18)]"></span>
+        <span class="text-sm font-semibold tracking-[0.2em] uppercase text-slate-200">Patrick Luo</span>
       </div>
-
-      <header class="relative mx-auto max-w-6xl px-6 pt-16 pb-24 lg:px-10">
-        <div
-          class="flex flex-wrap items-center justify-between gap-4 text-sm text-slate-200/80"
+      <div class="hidden items-center gap-6 text-sm text-slate-300 md:flex">
+        <a class="hover:text-white" href="index.html">Home</a>
+        <a class="hover:text-white" href="projects.html">Projects</a>
+        <a class="hover:text-white" href="experience.html">Experience</a>
+        <a class="hover:text-white" href="skills.html">Skills</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a
+          class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-900/80 text-purple-200 transition hover:-translate-y-[1px] hover:border-purple-400/60"
+          href="mailto:patrick.jf.luo@gmail.com"
+          aria-label="Email"
         >
-          <div class="flex items-center gap-2">
-            <span
-              class="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_0_8px_rgba(251,191,36,0.15)]"
-            ></span>
-            <span>Patrick Luo - Math &amp; CS at Hunter College</span>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-slate-300/70">
-              New York, NY | English | 中文 | 廣東話
-            </span>
-            <div class="flex items-center gap-2">
-              <a
-                class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-amber-200 shadow-sm ring-1 ring-white/10 backdrop-blur transition hover:-translate-y-[2px] hover:bg-white/20"
-                href="mailto:patrick.jf.luo@gmail.com"
-                aria-label="Email"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  class="h-5 w-5"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v.35l8 5.1 8-5.1V6H4Zm16 2.65-6.92 4.42a2 2 0 0 1-2.16 0L4 8.65V18h16V8.65Z"
-                  />
-                </svg>
-              </a>
-              <a
-                class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-amber-200 shadow-sm ring-1 ring-white/10 backdrop-blur transition hover:-translate-y-[2px] hover:bg-white/20"
-                href="https://github.com/pljf"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  class="h-5 w-5"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.14-1.1-1.45-1.1-1.45-.9-.61.07-.6.07-.6 1 .07 1.52 1.06 1.52 1.06.89 1.52 2.34 1.08 2.9.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-2 1.03-2.71-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.56 9.56 0 0 1 5 0c1.9-1.3 2.74-1.03 2.74-1.03.56 1.38.21 2.4.11 2.65.64.71 1.02 1.61 1.02 2.7 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"
-                  />
-                </svg>
-              </a>
-              <a
-                class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-amber-200 shadow-sm ring-1 ring-white/10 backdrop-blur transition hover:-translate-y-[2px] hover:bg-white/20"
-                href="https://www.linkedin.com/in/patrick-luo-540394292/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  class="h-5 w-5"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.24 8h4.52v14H.24V8Zm7.41 0h4.33v1.91h.06c.6-1.14 2.07-2.33 4.26-2.33 4.56 0 5.4 3 5.4 6.9V22H16.2v-6.25c0-1.49-.03-3.4-2.07-3.4-2.07 0-2.39 1.62-2.39 3.29V22H7.65V8Z"
-                  />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="currentColor">
+            <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v.35l8 5.1 8-5.1V6H4Zm16 2.65-6.92 4.42a2 2 0 0 1-2.16 0L4 8.65V18h16V8.65Z" />
+          </svg>
+        </a>
+        <a
+          class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-900/80 text-purple-200 transition hover:-translate-y-[1px] hover:border-purple-400/60"
+          href="https://github.com/pljf"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="GitHub"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="currentColor">
+            <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.14-1.1-1.45-1.1-1.45-.9-.61.07-.6.07-.6 1 .07 1.52 1.06 1.52 1.06.89 1.52 2.34 1.08 2.9.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-2 1.03-2.71-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.56 9.56 0 0 1 5 0c1.9-1.3 2.74-1.03 2.74-1.03.56 1.38.21 2.4.11 2.65.64.71 1.02 1.61 1.02 2.7 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
+          </svg>
+        </a>
+        <a
+          class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-900/80 text-purple-200 transition hover:-translate-y-[1px] hover:border-purple-400/60"
+          href="https://www.linkedin.com/in/patrick-luo-540394292/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="LinkedIn"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="currentColor">
+            <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.24 8h4.52v14H.24V8Zm7.41 0h4.33v1.91h.06c.6-1.14 2.07-2.33 4.26-2.33 4.56 0 5.4 3 5.4 6.9V22H16.2v-6.25c0-1.49-.03-3.4-2.07-3.4-2.07 0-2.39 1.62-2.39 3.29V22H7.65V8Z" />
+          </svg>
+        </a>
+      </div>
+    </header>
 
-        <div class="mt-12 grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-          <div class="space-y-6">
-            <p
-              class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-amber-200 ring-1 ring-white/10 backdrop-blur"
-            >
-              Aspiring Software Engineer
-            </p>
-            <h1 class="text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              Patrick Luo
-            </h1>
-            <p class="max-w-2xl text-lg text-slate-200">
-              Undergraduate student at Hunter College with strong C++
-              programming skills, full-stack development experience, and a
-              rigorous mathematical background from competitive mathematics.
-              Particularly interested in software development and
-              finance-related projects.
-            </p>
-            <div class="flex flex-wrap gap-3">
-              <a
-                class="rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-lg shadow-amber-400/30 transition hover:-translate-y-[1px] hover:shadow-amber-400/40"
-                href="mailto:patrick.jf.luo@gmail.com"
-              >
-                Get in touch
-              </a>
-              <a
-                class="rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white/90 transition hover:-translate-y-[1px] hover:border-white/35 hover:bg-white/5"
-                href="#projects"
-              >
-                View projects
-              </a>
-              <a
-                class="rounded-full border border-transparent px-5 py-2.5 text-sm font-semibold text-white/85 underline decoration-white/50 decoration-2 underline-offset-[6px] transition hover:text-white"
-                href="#experience"
-              >
-                Experience
-              </a>
-            </div>
-          </div>
-          <div
-            class="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur"
+    <!-- Hero -->
+    <section id="home" class="relative z-10 mx-auto grid max-w-6xl items-center gap-10 px-6 pb-12 lg:grid-cols-[1.1fr_0.9fr] lg:px-10">
+      <div class="space-y-6">
+        <p class="text-sm uppercase tracking-[0.3em] text-purple-200">Portfolio</p>
+        <h1 class="text-4xl font-semibold leading-tight text-white sm:text-5xl">
+          This is your engineer <span class="text-purple-300">Patrick Luo</span>
+        </h1>
+        <p class="max-w-2xl text-lg text-slate-200/90">
+          Undergraduate student at Hunter College with strong C++ programming skills, full-stack development experience,
+          and a rigorous mathematical background from competitive mathematics. Particularly interested in software
+          development and finance-related projects.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            class="rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple-500/30 transition hover:-translate-y-[1px] hover:shadow-purple-400/50"
+            href="mailto:patrick.jf.luo@gmail.com"
           >
-            <div class="grid gap-3 text-sm text-slate-200">
-              <div class="flex items-center justify-between">
-                <span class="text-slate-300/80">Based</span>
-                <span class="font-semibold text-white">
-                  Manhattan, New York
-                </span>
-              </div>
-              <div class="flex items-center justify-between">
-                <span class="text-slate-300/80">Email</span>
-                <a
-                  class="font-semibold text-amber-200 hover:text-amber-100"
-                  href="mailto:patrick.jf.luo@gmail.com"
-                >
-                  patrick.jf.luo@gmail.com
-                </a>
-              </div>
-              <div class="flex items-center justify-between">
-                <span class="text-slate-300/80">Phone</span>
-                <a
-                  class="font-semibold text-amber-200 hover:text-amber-100"
-                  href="tel:+19173027373"
-                >
-                  (+1) 917-302-7373
-                </a>
-              </div>
-              <div class="flex items-center justify-between">
-                <span class="text-slate-300/80">Interests</span>
-                <span class="font-semibold text-white">
-                  Equity research | Full-stack builds
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-    </div>
-
-    <main class="relative mx-auto grid max-w-6xl gap-12 px-6 pb-20 lg:px-10">
-      <section
-        id="experience"
-        class="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur"
-      >
-        <div class="flex items-center justify-between gap-4">
-          <h2 class="text-xl font-semibold text-white">Experience &amp; Impact</h2>
-        </div>
-        <div class="mt-6 space-y-6">
-          <div
-            class="rounded-2xl border border-white/10 bg-slate-900/50 p-6 shadow-inner"
+            Discuss for projects
+          </a>
+          <a
+            class="rounded-lg border border-slate-700/60 bg-slate-900/60 px-5 py-2.5 text-sm font-semibold text-white/90 transition hover:-translate-y-[1px] hover:border-purple-300/60 hover:text-purple-100"
+            href="projects.html"
           >
-            <div
-              class="flex flex-wrap items-center gap-2 text-sm text-slate-300"
-            >
-              <span class="font-semibold text-white">
-                Investment and Finance Intern
-              </span>
-              <span class="text-slate-400">|</span>
-              <span>Jasco Philanthropies</span>
-              <span class="text-slate-400">|</span>
-              <span>New York, NY</span>
-              <span
-                class="ml-auto rounded-full bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-amber-200"
-              >
-                July 2025
-              </span>
+            View portfolio →
+          </a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="absolute -left-6 -top-6 h-36 w-36 rounded-full bg-purple-500/20 blur-3xl"></div>
+        <div class="absolute right-2 top-8 h-28 w-28 rounded-full bg-cyan-400/20 blur-3xl"></div>
+        <div class="relative mx-auto flex h-80 w-80 items-center justify-center rounded-2xl border border-slate-800/80 bg-slate-900/70 shadow-[0_15px_60px_rgba(99,102,241,0.3)]">
+          <div class="h-64 w-64 rounded-full bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 ring-2 ring-purple-400/40 ring-offset-8 ring-offset-slate-900/80"></div>
+          <div class="absolute inset-10 flex items-center justify-center rounded-full border border-slate-700/80 bg-slate-950/70">
+            <div class="text-center">
+              <p class="text-sm text-slate-300">Patrick Luo</p>
+              <p class="text-xs text-slate-400">Full-stack &amp; Finance</p>
             </div>
-            <ul class="mt-4 space-y-2 text-slate-200">
-              <li class="flex gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-amber-400/90"></span>
-                <span>
-                  Ran equity research on NVDA and AAPL for LP updates,
-                  distilling performance drivers.
-                </span>
-              </li>
-              <li class="flex gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-amber-400/90"></span>
-                <span>
-                  Built concise performance summaries and visuals for investment
-                  presentations.
-                </span>
-              </li>
-              <li class="flex gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-amber-400/90"></span>
-                <span>
-                  Supported portfolio reviews and surfaced new investment
-                  opportunities.
-                </span>
-              </li>
-            </ul>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section
-        id="projects"
-        class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/0 p-8 shadow-xl backdrop-blur"
+    <!-- Specialties -->
+    <section class="relative z-10 mx-auto max-w-6xl px-6 pb-12 lg:px-10">
+      <div class="text-center space-y-2 mb-8">
+        <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Specialty</p>
+        <h2 class="text-2xl font-semibold text-white">My Specialities</h2>
+        <p class="text-sm text-slate-300">Focused problem-solving across engineering and finance.</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="card rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-[0_12px_35px_rgba(99,102,241,0.18)]">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/15 text-purple-200">
+            <span class="mono text-base">C++</span>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold text-white">Systems &amp; C++</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Building performant components with modern C++ and disciplined engineering practices.
+          </p>
+        </div>
+        <div class="card rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-[0_12px_35px_rgba(99,102,241,0.18)]">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-200">
+            <span class="mono text-base">FS</span>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold text-white">Full-stack</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            React-first frontends with solid backends, data sync, and resilient APIs.
+          </p>
+        </div>
+        <div class="card rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-[0_12px_35px_rgba(99,102,241,0.18)]">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-200">
+            <span class="mono text-base">Fin</span>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold text-white">Equity Research</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Structured analysis for updates on NVDA, AAPL, and portfolio opportunities.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick links -->
+    <section class="relative z-10 mx-auto grid max-w-6xl gap-4 px-6 pb-12 lg:grid-cols-3 lg:px-10">
+      <a
+        href="projects.html"
+        class="card rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-[0_12px_35px_rgba(56,189,248,0.16)] transition hover:-translate-y-[2px]"
       >
         <div class="flex items-center justify-between">
-          <h2 class="text-xl font-semibold text-white">Projects</h2>
+          <h3 class="text-lg font-semibold text-white">Projects</h3>
+          <span class="text-sm text-purple-200">↗</span>
         </div>
-        <div class="mt-6 grid gap-6 sm:grid-cols-2">
-          <article
-            class="rounded-2xl border border-white/10 bg-slate-900/50 p-5 shadow-inner"
-          >
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <h3 class="text-lg font-semibold text-white">
-                  GoodHub (Hackathon, Mar 2025)
-                </h3>
-                <p class="mt-2 text-sm text-slate-200">
-                  Full-stack platform connecting volunteers with local and
-                  global opportunities; event creation, registration, SQL-backed
-                  sync, team challenges, and discussion forums.
-                </p>
-              </div>
-              <span
-                class="rounded-full bg-amber-400/90 px-3 py-1 text-xs font-semibold text-slate-900"
-              >
-                Finished
-              </span>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span
-                class="rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200 ring-1 ring-white/10"
-              >
-                React
-              </span>
-              <span
-                class="rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200 ring-1 ring-white/10"
-              >
-                Full-stack
-              </span>
-            </div>
-          </article>
+        <p class="mt-2 text-sm text-slate-300">
+          Browse full-stack builds and product work with deeper breakdowns.
+        </p>
+      </a>
+      <a
+        href="experience.html"
+        class="card rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-[0_12px_35px_rgba(124,58,237,0.16)] transition hover:-translate-y-[2px]"
+      >
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-white">Experience</h3>
+          <span class="text-sm text-purple-200">↗</span>
         </div>
-      </section>
-
-      <section class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <div
-          class="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur"
-        >
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold text-white">Education</h2>
-            <span class="text-xs uppercase tracking-[0.2em] text-amber-200">
-              Math &amp; CS
-            </span>
-          </div>
-          <div class="mt-6 space-y-4">
-            <div
-              class="rounded-xl border border-white/10 bg-slate-900/50 p-4"
-            >
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="text-sm font-semibold text-white">Hunter College</p>
-                  <p class="text-sm text-slate-300">
-                    B.A. Mathematics &amp; Computer Science
-                  </p>
-                </div>
-                <span class="text-xs font-medium text-slate-300">
-                  2023-2027
-                </span>
-              </div>
-              <p class="mt-2 text-xs text-slate-400">Aggregate - 75%</p>
-            </div>
-
-            <div
-              class="rounded-xl border border-white/10 bg-slate-900/50 p-4"
-            >
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="text-sm font-semibold text-white">
-                    New Utrecht High School
-                  </p>
-                  <p class="text-sm text-slate-300">High School Diploma</p>
-                </div>
-                <span class="text-xs font-medium text-slate-300">
-                  2019-2023
-                </span>
-              </div>
-              <p class="mt-2 text-xs text-slate-400">Aggregate - 100%</p>
-            </div>
-          </div>
+        <p class="mt-2 text-sm text-slate-300">
+          See equity research, storytelling for LPs, and outcomes.
+        </p>
+      </a>
+      <a
+        href="skills.html"
+        class="card rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-[0_12px_35px_rgba(16,185,129,0.16)] transition hover:-translate-y-[2px]"
+      >
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-white">Skills</h3>
+          <span class="text-sm text-purple-200">↗</span>
         </div>
-
-        <div
-          class="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur"
-        >
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold text-white">Skills</h2>
-            <span class="text-xs uppercase tracking-[0.2em] text-amber-200">
-              Toolkit
-            </span>
-          </div>
-          <div class="mt-6 flex flex-wrap gap-2">
-            <span
-              class="rounded-full bg-slate-900/70 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10"
-              >C++</span
-            >
-            <span
-              class="rounded-full bg-slate-900/70 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10"
-              >React</span
-            >
-            <span
-              class="rounded-full bg-slate-900/70 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10"
-              >HTML/CSS</span
-            >
-            <span
-              class="rounded-full bg-slate-900/70 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10"
-              >JavaScript</span
-            >
-            <span
-              class="rounded-full bg-slate-900/70 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10"
-              >PostgreSQL</span
-            >
-            <span
-              class="rounded-full bg-slate-900/70 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10"
-              >Finance Research</span
-            >
-            <span
-              class="rounded-full bg-slate-900/70 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10"
-              >Data Visualization</span
-            >
-          </div>
-          <div
-            class="mt-6 rounded-xl border border-white/10 bg-slate-900/50 p-4 text-sm text-slate-200"
-          >
-            <p class="font-semibold text-white">Achievements</p>
-            <ul class="mt-2 space-y-1">
-              <li class="flex gap-2">
-                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400/90"></span>
-                <span>NYCIML 2022 Fall Senior B - Third place</span>
-              </li>
-              <li class="flex gap-2">
-                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400/90"></span>
-                <span>NYCIML 2023 Spring Senior B - Third place</span>
-              </li>
-              <li class="flex gap-2">
-                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400/90"></span>
-                <span>Participant, Hunter College Hackathon 2025</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </main>
+        <p class="mt-2 text-sm text-slate-300">
+          Tooling and strengths across engineering and finance.
+        </p>
+      </a>
+    </section>
   </body>
 </html>
