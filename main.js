@@ -1,5 +1,7 @@
 (() => {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.classList.add("motion-ready");
+
   const roleTarget = document.getElementById("typed-role");
   const roles = [
     "Creative Software Developer",
@@ -10,7 +12,7 @@
 
   if (roleTarget && !prefersReducedMotion) {
     let roleIndex = 0;
-    let charIndex = 0;
+    let charIndex = roles[0].length;
     let deleting = false;
 
     const typeRole = () => {
@@ -40,7 +42,108 @@
       window.setTimeout(typeRole, 260);
     };
 
-    window.setTimeout(typeRole, 1200);
+    window.setTimeout(typeRole, 3200);
+  }
+
+  const revealItems = Array.from(document.querySelectorAll(".reveal-card"));
+  if (revealItems.length) {
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    } else {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+
+      revealItems.forEach((item, index) => {
+        item.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+        revealObserver.observe(item);
+      });
+    }
+  }
+
+  const sectionLinks = Array.from(document.querySelectorAll("[data-section-link]"));
+  const sectionJumps = Array.from(document.querySelectorAll("[data-scroll-section]"));
+  const sections = Array.from(document.querySelectorAll("[data-section]"));
+  const siteHeader = document.querySelector(".site-header");
+  const setActiveSection = (sectionName) => {
+    sectionLinks.forEach((link) => {
+      const isActive = link.dataset.sectionLink === sectionName;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  };
+  const scrollToSection = (sectionName) => {
+    const section = document.getElementById(sectionName);
+    if (!section) {
+      return;
+    }
+
+    const headerBottom = siteHeader ? siteHeader.getBoundingClientRect().bottom : 0;
+    const headerOffset = Math.max(headerBottom, 78);
+    const anchor = sectionName === "home" ? section : section.querySelector(".section-header") || section;
+    const transform = window.getComputedStyle(anchor).transform;
+    const transformY = transform && transform !== "none" ? new DOMMatrixReadOnly(transform).m42 : 0;
+    const anchorTop = anchor.getBoundingClientRect().top;
+    const top = window.scrollY + anchorTop - transformY - headerOffset - 8;
+    window.scrollTo({
+      top: Math.max(0, Math.round(top)),
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  };
+  const activateSection = (sectionName) => {
+    scrollToSection(sectionName);
+    setActiveSection(sectionName);
+    if (sectionName) {
+      window.history.pushState(null, "", `#${sectionName}`);
+    }
+  };
+
+  if (sectionLinks.length && sections.length) {
+    sectionLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        activateSection(link.dataset.sectionLink);
+      });
+    });
+
+    sectionJumps.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        activateSection(link.dataset.scrollSection);
+      });
+    });
+
+    if ("IntersectionObserver" in window) {
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (visible) {
+            setActiveSection(visible.target.dataset.section);
+          }
+        },
+        {
+          rootMargin: "-35% 0px -45% 0px",
+          threshold: [0.12, 0.32, 0.56],
+        }
+      );
+
+      sections.forEach((section) => sectionObserver.observe(section));
+    }
   }
 
   const canvas = document.getElementById("hero-canvas");

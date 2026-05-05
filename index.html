@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="home-doc" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,10 +24,11 @@
           <span>Patrick Luo</span>
         </a>
         <nav class="site-nav" aria-label="Primary navigation">
-          <a href="index.html" aria-current="page">Home</a>
-          <a href="projects.html">Projects</a>
-          <a href="experience.html">Experience</a>
-          <a href="skills.html">Skills</a>
+          <a class="is-active" href="#home" data-section-link="home" aria-current="page">Home</a>
+          <a href="#about" data-section-link="about">About Me</a>
+          <a href="#projects" data-section-link="projects">Projects</a>
+          <a href="#experience" data-section-link="experience">Experience</a>
+          <a href="#skills" data-section-link="skills">Skills</a>
         </nav>
         <div class="social-links" aria-label="Contact links">
           <a href="mailto:patrick.jf.luo@gmail.com">Email</a>
@@ -38,28 +39,23 @@
     </header>
 
     <main>
-      <section class="cinematic-hero" aria-labelledby="intro-title">
+      <section class="cinematic-hero" id="home" aria-labelledby="intro-title" data-section="home">
         <canvas id="hero-canvas" aria-hidden="true"></canvas>
         <div class="hero-vignette" aria-hidden="true"></div>
         <div class="hero-scan" aria-hidden="true"></div>
 
         <div class="page-shell intro-stack">
           <p class="intro-kicker">Hunter College CS / New York</p>
-          <h1 class="intro-name" id="intro-title" aria-label="Patrick Luo">
-            <span style="--i: 0">P</span><span style="--i: 1">a</span><span style="--i: 2">t</span
-            ><span style="--i: 3">r</span><span style="--i: 4">i</span><span style="--i: 5">c</span
-            ><span style="--i: 6">k</span><span class="name-gap" style="--i: 7">&nbsp;</span
-            ><span style="--i: 8">L</span><span style="--i: 9">u</span><span style="--i: 10">o</span>
-          </h1>
+          <h1 class="intro-name" id="intro-title">Patrick Luo</h1>
           <div class="role-line" aria-label="Current focus">
             <span class="role-prefix">I build as a</span>
-            <span class="typed-role" id="typed-role">Full-stack Developer</span>
+            <span class="typed-role" id="typed-role">Creative Software Developer</span>
           </div>
           <p class="intro-copy">
             CS student shaping full-stack products, ML experiments, and finance analysis into polished, usable systems.
           </p>
           <div class="actions intro-actions">
-            <a class="button primary" href="projects.html">Enter portfolio</a>
+            <a class="button primary" href="#about" data-scroll-section="about">Enter portfolio</a>
             <a class="button ghost" href="mailto:patrick.jf.luo@gmail.com">Contact me</a>
           </div>
         </div>
@@ -70,57 +66,155 @@
         </div>
       </section>
 
-      <section class="page-shell section home-overview">
-        <div class="section-header">
+      <section class="page-shell section home-feature-section about-section" id="about" data-section="about">
+        <div class="section-header reveal-card">
           <div>
-            <p class="kicker">Focus</p>
-            <h2>Software, data, and finance in one portfolio.</h2>
+            <p class="kicker">About Me</p>
+            <h2>Software engineer, CS student, and systems-minded builder.</h2>
           </div>
           <p>
-            The work is organized around the areas I want to grow in: product engineering, technical problem solving,
-            and market-focused analysis.
+            A longer introduction to who I am, what I build, and the technical direction I am growing toward.
           </p>
         </div>
-        <div class="focus-grid">
-          <article class="focus-card spotlight-card">
-            <span class="card-index">01</span>
-            <h3>Full-stack product</h3>
-            <p>React interfaces, backend thinking, SQL-backed data flows, and polished user paths.</p>
-          </article>
-          <article class="focus-card spotlight-card">
-            <span class="card-index">02</span>
-            <h3>ML and systems</h3>
-            <p>Problem solving with C++, model experiments, and careful debugging from idea to result.</p>
-          </article>
-          <article class="focus-card spotlight-card">
-            <span class="card-index">03</span>
-            <h3>Finance analysis</h3>
-            <p>Equity research, catalysts, risk framing, charts, and concise investment storytelling.</p>
-          </article>
-        </div>
+        <article class="feature-module module-about reveal-card">
+          <div class="module-top">
+            <span>Profile / 01</span>
+            <strong>Patrick Luo</strong>
+          </div>
+          <div class="about-layout">
+            <figure class="about-portrait">
+              <img src="assets/about-avatar.jpg" alt="Patrick Luo profile image" />
+            </figure>
+            <div class="about-copy">
+              <h3>Computer Science and Mathematics student at Hunter College, CUNY.</h3>
+              <p>
+                I'm Patrick Luo, a student based in New York and graduating in May 2027. My work lives at the
+                intersection of full-stack software, artificial intelligence, and market-focused analysis. I like
+                projects where the interface, data flow, and decision-making logic all have to line up cleanly.
+              </p>
+              <p>
+                I am especially interested in building practical systems around AI and real-world impact: benchmarking
+                model behavior, studying how LLMs reason, making AI tools more reliable and accessible, and turning
+                complex technical ideas into working products. Whether I am writing modular C++, building React
+                applications, connecting APIs, or shaping finance research into concise stories, I care about clarity,
+                usefulness, and execution.
+              </p>
+              <p>
+                Outside the code itself, I enjoy learning from ambitious technical problems, collaborating with people
+                who care about craft, and improving the way I communicate ideas. My long-term goal is to keep growing
+                as an engineer who can move between product, data, AI, and finance without losing attention to detail.
+              </p>
+              <div class="about-grid">
+                <div>
+                  <span>Major</span>
+                  <strong>CS</strong>
+                </div>
+                <div>
+                  <span>Major</span>
+                  <strong>Math</strong>
+                </div>
+                <div>
+                  <span>GPA</span>
+                  <strong>3.6</strong>
+                </div>
+                <div>
+                  <span>Grad Year</span>
+                  <strong>2027</strong>
+                </div>
+              </div>
+              <div class="module-tags">
+                <span>AI/ML</span>
+                <span>Full-stack</span>
+                <span>C++</span>
+                <span>React</span>
+                <span>Real-time APIs</span>
+                <span>Finance Research</span>
+              </div>
+            </div>
+          </div>
+          <div class="signal-meter about" aria-hidden="true"><span style="--level: 78%"></span></div>
+        </article>
       </section>
 
-      <section class="page-shell section compact">
-        <div class="link-grid">
-          <a class="link-card kinetic-link" href="projects.html">
-            <span class="card-index">Projects</span>
-            <h3>GoodHub and builds</h3>
-            <p>Full-stack work with product framing and implementation detail.</p>
-            <span>Open projects &rarr;</span>
-          </a>
-          <a class="link-card kinetic-link" href="experience.html">
-            <span class="card-index">Experience</span>
-            <h3>Research impact</h3>
-            <p>Finance internship work, LP-ready writing, and chart-backed summaries.</p>
-            <span>Open experience &rarr;</span>
-          </a>
-          <a class="link-card kinetic-link" href="skills.html">
-            <span class="card-index">Skills</span>
-            <h3>Toolkit</h3>
-            <p>Programming, data, finance, and competitive math highlights.</p>
-            <span>Open skills &rarr;</span>
-          </a>
+      <section class="page-shell section home-feature-section" id="projects" data-section="projects">
+        <div class="section-header reveal-card">
+          <div>
+            <p class="kicker">Projects</p>
+            <h2>Product builds with real data flow.</h2>
+          </div>
+          <p>
+            Full-stack work focused on clean user paths, stable backend thinking, and enough polish to feel usable.
+          </p>
         </div>
+        <article class="feature-module module-project reveal-card">
+          <div class="module-top">
+            <span>Project / 02</span>
+            <strong>GoodHub</strong>
+          </div>
+          <p>Full-stack volunteer platform with event creation, registration, SQL-backed sync, and community features.</p>
+          <div class="module-tags">
+            <span>React</span>
+            <span>TypeScript</span>
+            <span>PostgreSQL</span>
+            <span>Node</span>
+          </div>
+          <a class="module-action" href="projects.html">Open project file</a>
+          <div class="signal-meter" aria-hidden="true"><span style="--level: 82%"></span></div>
+        </article>
+      </section>
+
+      <section class="page-shell section home-feature-section" id="experience" data-section="experience">
+        <div class="section-header reveal-card">
+          <div>
+            <p class="kicker">Experience</p>
+            <h2>Finance research shaped for decisions.</h2>
+          </div>
+          <p>
+            Concise market writing, chart-backed analysis, and portfolio updates around public equities.
+          </p>
+        </div>
+        <article class="feature-module module-experience reveal-card">
+          <div class="module-top">
+            <span>Experience / 03</span>
+            <strong>Finance Research</strong>
+          </div>
+          <p>LP-ready briefs, equity research, charting, and concise portfolio updates around NVDA and AAPL.</p>
+          <div class="module-tags">
+            <span>NVDA</span>
+            <span>AAPL</span>
+            <span>Charts</span>
+            <span>Storytelling</span>
+          </div>
+          <a class="module-action" href="experience.html">Open research log</a>
+          <div class="signal-meter cyan" aria-hidden="true"><span style="--level: 74%"></span></div>
+        </article>
+      </section>
+
+      <section class="page-shell section home-feature-section" id="skills" data-section="skills">
+        <div class="section-header reveal-card">
+          <div>
+            <p class="kicker">Skills</p>
+            <h2>Engineering toolkit plus analytical range.</h2>
+          </div>
+          <p>
+            C++, React, SQL, data visualization, ML experiments, and structured problem solving.
+          </p>
+        </div>
+        <article class="feature-module module-skills reveal-card">
+          <div class="module-top">
+            <span>Loadout / 04</span>
+            <strong>Technical Toolkit</strong>
+          </div>
+          <p>C++, React, PostgreSQL, JavaScript, data visualization, and structured problem solving.</p>
+          <div class="module-tags">
+            <span>C++</span>
+            <span>React</span>
+            <span>SQL</span>
+            <span>Data Viz</span>
+          </div>
+          <a class="module-action" href="skills.html">Open toolkit</a>
+          <div class="signal-meter rose" aria-hidden="true"><span style="--level: 88%"></span></div>
+        </article>
       </section>
     </main>
 
@@ -131,6 +225,6 @@
       </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="main.js?v=20260505-entry-about"></script>
   </body>
 </html>
