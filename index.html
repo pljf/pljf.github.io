@@ -6,218 +6,131 @@
     <title>Patrick Luo | Portfolio</title>
     <meta
       name="description"
-      content="Portfolio for Patrick Luo with experience in software, finance, and full-stack projects."
+      content="Portfolio for Patrick Luo, a CS student focused on full-stack development, machine learning, and finance analysis."
     />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <style>
-      body {
-        font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
-        background: radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.08), transparent 35%),
-          radial-gradient(circle at 85% 5%, rgba(56, 189, 248, 0.08), transparent 32%),
-          linear-gradient(145deg, #0b0c12, #0d1020 60%, #0b0c12);
-        color: #e5e7eb;
-      }
-      .bg-grid {
-        background-image: linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-        background-size: 36px 36px;
-      }
-      .card {
-        position: relative;
-        overflow: hidden;
-      }
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: -1px;
-        border-radius: 18px;
-        background: linear-gradient(130deg, rgba(124, 58, 237, 0.28), rgba(56, 189, 248, 0.2), rgba(167, 139, 250, 0.2));
-        opacity: 0.7;
-        filter: blur(16px);
-        z-index: 0;
-      }
-      .card > * {
-        position: relative;
-        z-index: 1;
-      }
-      .mono {
-        font-family: "IBM Plex Mono", monospace;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="min-h-screen bg-[#0b0c12] text-slate-100">
-    <div class="pointer-events-none fixed inset-0 bg-grid opacity-40"></div>
-    <div class="fixed inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(124,58,237,0.12),transparent_25%),radial-gradient(circle_at_80%_10%,rgba(56,189,248,0.12),transparent_25%),radial-gradient(circle_at_50%_70%,rgba(16,185,129,0.08),transparent_30%)]"></div>
-
-    <!-- Navbar -->
-    <header class="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6 lg:px-10">
-      <div class="flex items-center gap-3">
-        <span class="h-2.5 w-2.5 rounded-full bg-purple-400 shadow-[0_0_0_8px_rgba(168,85,247,0.18)]"></span>
-        <span class="text-sm font-semibold tracking-[0.2em] uppercase text-slate-200">Patrick Luo</span>
-      </div>
-      <div class="hidden items-center gap-6 text-sm text-slate-300 md:flex">
-        <a class="hover:text-white" href="index.html">Home</a>
-        <a class="hover:text-white" href="projects.html">Projects</a>
-        <a class="hover:text-white" href="experience.html">Experience</a>
-        <a class="hover:text-white" href="skills.html">Skills</a>
-      </div>
-      <div class="flex items-center gap-2">
-        <a
-          class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-900/80 text-purple-200 transition hover:-translate-y-[1px] hover:border-purple-400/60"
-          href="mailto:patrick.jf.luo@gmail.com"
-          aria-label="Email"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="currentColor">
-            <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v.35l8 5.1 8-5.1V6H4Zm16 2.65-6.92 4.42a2 2 0 0 1-2.16 0L4 8.65V18h16V8.65Z" />
-          </svg>
+  <body class="home-page">
+    <header class="site-header home-header">
+      <div class="page-shell nav-inner">
+        <a class="brand" href="index.html" aria-label="Patrick Luo home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Patrick Luo</span>
         </a>
-        <a
-          class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-900/80 text-purple-200 transition hover:-translate-y-[1px] hover:border-purple-400/60"
-          href="https://github.com/pljf"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="GitHub"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="currentColor">
-            <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.14-1.1-1.45-1.1-1.45-.9-.61.07-.6.07-.6 1 .07 1.52 1.06 1.52 1.06.89 1.52 2.34 1.08 2.9.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-2 1.03-2.71-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.56 9.56 0 0 1 5 0c1.9-1.3 2.74-1.03 2.74-1.03.56 1.38.21 2.4.11 2.65.64.71 1.02 1.61 1.02 2.7 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
-          </svg>
-        </a>
-        <a
-          class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-900/80 text-purple-200 transition hover:-translate-y-[1px] hover:border-purple-400/60"
-          href="https://www.linkedin.com/in/patrick-luo-540394292/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="LinkedIn"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="currentColor">
-            <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.24 8h4.52v14H.24V8Zm7.41 0h4.33v1.91h.06c.6-1.14 2.07-2.33 4.26-2.33 4.56 0 5.4 3 5.4 6.9V22H16.2v-6.25c0-1.49-.03-3.4-2.07-3.4-2.07 0-2.39 1.62-2.39 3.29V22H7.65V8Z" />
-          </svg>
-        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="index.html" aria-current="page">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="experience.html">Experience</a>
+          <a href="skills.html">Skills</a>
+        </nav>
+        <div class="social-links" aria-label="Contact links">
+          <a href="mailto:patrick.jf.luo@gmail.com">Email</a>
+          <a href="https://github.com/pljf" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/patrick-luo-540394292/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
       </div>
     </header>
 
-    <!-- Hero -->
-    <section id="home" class="relative z-10 mx-auto grid max-w-6xl items-center gap-10 px-6 pb-12 lg:grid-cols-[1.1fr_0.9fr] lg:px-10">
-      <div class="space-y-6">
-        <p class="text-sm uppercase tracking-[0.3em] text-purple-200">Portfolio</p>
-        <h1 class="text-4xl font-semibold leading-tight text-white sm:text-5xl">
-          This is your engineer <span class="text-purple-300">Patrick Luo</span>
-        </h1>
-        <p class="max-w-2xl text-lg text-slate-200/90">
-          Undergraduate student at Hunter College with strong C++ programming skills, full-stack development experience,
-          and a rigorous mathematical background from competitive mathematics. Particularly interested in software
-          development and finance-related projects.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a
-            class="rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple-500/30 transition hover:-translate-y-[1px] hover:shadow-purple-400/50"
-            href="mailto:patrick.jf.luo@gmail.com"
-          >
-            Discuss for projects
-          </a>
-          <a
-            class="rounded-lg border border-slate-700/60 bg-slate-900/60 px-5 py-2.5 text-sm font-semibold text-white/90 transition hover:-translate-y-[1px] hover:border-purple-300/60 hover:text-purple-100"
-            href="projects.html"
-          >
-            View portfolio →
-          </a>
-        </div>
-      </div>
-      <div class="relative">
-        <div class="absolute -left-6 -top-6 h-36 w-36 rounded-full bg-purple-500/20 blur-3xl"></div>
-        <div class="absolute right-2 top-8 h-28 w-28 rounded-full bg-cyan-400/20 blur-3xl"></div>
-        <div class="relative mx-auto flex h-80 w-80 items-center justify-center rounded-2xl border border-slate-800/80 bg-slate-900/70 shadow-[0_15px_60px_rgba(99,102,241,0.3)]">
-          <div class="h-64 w-64 rounded-full bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 ring-2 ring-purple-400/40 ring-offset-8 ring-offset-slate-900/80"></div>
-          <div class="absolute inset-10 flex items-center justify-center rounded-full border border-slate-700/80 bg-slate-950/70">
-            <div class="text-center">
-              <p class="text-sm text-slate-300">Patrick Luo</p>
-              <p class="text-xs text-slate-400">Full-stack &amp; Finance</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <main>
+      <section class="cinematic-hero" aria-labelledby="intro-title">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-vignette" aria-hidden="true"></div>
+        <div class="hero-scan" aria-hidden="true"></div>
 
-    <!-- Specialties -->
-    <section class="relative z-10 mx-auto max-w-6xl px-6 pb-12 lg:px-10">
-      <div class="text-center space-y-2 mb-8">
-        <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Specialty</p>
-        <h2 class="text-2xl font-semibold text-white">My Specialities</h2>
-        <p class="text-sm text-slate-300">Focused problem-solving across engineering and finance.</p>
-      </div>
-      <div class="grid gap-4 sm:grid-cols-3">
-        <div class="card rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-[0_12px_35px_rgba(99,102,241,0.18)]">
-          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/15 text-purple-200">
-            <span class="mono text-base">C++</span>
+        <div class="page-shell intro-stack">
+          <p class="intro-kicker">Hunter College CS / New York</p>
+          <h1 class="intro-name" id="intro-title" aria-label="Patrick Luo">
+            <span style="--i: 0">P</span><span style="--i: 1">a</span><span style="--i: 2">t</span
+            ><span style="--i: 3">r</span><span style="--i: 4">i</span><span style="--i: 5">c</span
+            ><span style="--i: 6">k</span><span class="name-gap" style="--i: 7">&nbsp;</span
+            ><span style="--i: 8">L</span><span style="--i: 9">u</span><span style="--i: 10">o</span>
+          </h1>
+          <div class="role-line" aria-label="Current focus">
+            <span class="role-prefix">I build as a</span>
+            <span class="typed-role" id="typed-role">Full-stack Developer</span>
           </div>
-          <h3 class="mt-4 text-lg font-semibold text-white">Systems &amp; C++</h3>
-          <p class="mt-2 text-sm text-slate-300">
-            Building performant components with modern C++ and disciplined engineering practices.
+          <p class="intro-copy">
+            CS student shaping full-stack products, ML experiments, and finance analysis into polished, usable systems.
           </p>
-        </div>
-        <div class="card rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-[0_12px_35px_rgba(99,102,241,0.18)]">
-          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-200">
-            <span class="mono text-base">FS</span>
+          <div class="actions intro-actions">
+            <a class="button primary" href="projects.html">Enter portfolio</a>
+            <a class="button ghost" href="mailto:patrick.jf.luo@gmail.com">Contact me</a>
           </div>
-          <h3 class="mt-4 text-lg font-semibold text-white">Full-stack</h3>
-          <p class="mt-2 text-sm text-slate-300">
-            React-first frontends with solid backends, data sync, and resilient APIs.
-          </p>
         </div>
-        <div class="card rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-[0_12px_35px_rgba(99,102,241,0.18)]">
-          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-200">
-            <span class="mono text-base">Fin</span>
-          </div>
-          <h3 class="mt-4 text-lg font-semibold text-white">Equity Research</h3>
-          <p class="mt-2 text-sm text-slate-300">
-            Structured analysis for updates on NVDA, AAPL, and portfolio opportunities.
-          </p>
-        </div>
-      </div>
-    </section>
 
-    <!-- Quick links -->
-    <section class="relative z-10 mx-auto grid max-w-6xl gap-4 px-6 pb-12 lg:grid-cols-3 lg:px-10">
-      <a
-        href="projects.html"
-        class="card rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-[0_12px_35px_rgba(56,189,248,0.16)] transition hover:-translate-y-[2px]"
-      >
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-semibold text-white">Projects</h3>
-          <span class="text-sm text-purple-200">↗</span>
+        <div class="scroll-cue" aria-hidden="true">
+          <span></span>
+          <p>Scroll</p>
         </div>
-        <p class="mt-2 text-sm text-slate-300">
-          Browse full-stack builds and product work with deeper breakdowns.
-        </p>
-      </a>
-      <a
-        href="experience.html"
-        class="card rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-[0_12px_35px_rgba(124,58,237,0.16)] transition hover:-translate-y-[2px]"
-      >
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-semibold text-white">Experience</h3>
-          <span class="text-sm text-purple-200">↗</span>
+      </section>
+
+      <section class="page-shell section home-overview">
+        <div class="section-header">
+          <div>
+            <p class="kicker">Focus</p>
+            <h2>Software, data, and finance in one portfolio.</h2>
+          </div>
+          <p>
+            The work is organized around the areas I want to grow in: product engineering, technical problem solving,
+            and market-focused analysis.
+          </p>
         </div>
-        <p class="mt-2 text-sm text-slate-300">
-          See equity research, storytelling for LPs, and outcomes.
-        </p>
-      </a>
-      <a
-        href="skills.html"
-        class="card rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-[0_12px_35px_rgba(16,185,129,0.16)] transition hover:-translate-y-[2px]"
-      >
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-semibold text-white">Skills</h3>
-          <span class="text-sm text-purple-200">↗</span>
+        <div class="focus-grid">
+          <article class="focus-card spotlight-card">
+            <span class="card-index">01</span>
+            <h3>Full-stack product</h3>
+            <p>React interfaces, backend thinking, SQL-backed data flows, and polished user paths.</p>
+          </article>
+          <article class="focus-card spotlight-card">
+            <span class="card-index">02</span>
+            <h3>ML and systems</h3>
+            <p>Problem solving with C++, model experiments, and careful debugging from idea to result.</p>
+          </article>
+          <article class="focus-card spotlight-card">
+            <span class="card-index">03</span>
+            <h3>Finance analysis</h3>
+            <p>Equity research, catalysts, risk framing, charts, and concise investment storytelling.</p>
+          </article>
         </div>
-        <p class="mt-2 text-sm text-slate-300">
-          Tooling and strengths across engineering and finance.
-        </p>
-      </a>
-    </section>
+      </section>
+
+      <section class="page-shell section compact">
+        <div class="link-grid">
+          <a class="link-card kinetic-link" href="projects.html">
+            <span class="card-index">Projects</span>
+            <h3>GoodHub and builds</h3>
+            <p>Full-stack work with product framing and implementation detail.</p>
+            <span>Open projects &rarr;</span>
+          </a>
+          <a class="link-card kinetic-link" href="experience.html">
+            <span class="card-index">Experience</span>
+            <h3>Research impact</h3>
+            <p>Finance internship work, LP-ready writing, and chart-backed summaries.</p>
+            <span>Open experience &rarr;</span>
+          </a>
+          <a class="link-card kinetic-link" href="skills.html">
+            <span class="card-index">Skills</span>
+            <h3>Toolkit</h3>
+            <p>Programming, data, finance, and competitive math highlights.</p>
+            <span>Open skills &rarr;</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="page-shell footer-inner">
+        <span>Patrick Luo</span>
+        <span>Full-stack / ML / Finance</span>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
   </body>
 </html>
