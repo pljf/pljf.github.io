@@ -6,7 +6,7 @@
     <title>Projects | Patrick Luo</title>
     <meta
       name="description"
-      content="Selected projects from Patrick Luo, including full-stack product work and hackathon builds."
+      content="Explore Patrick Luo's projects: CaseCraft for AI-assisted legal reasoning, TableSync for collaborative meal planning, and GoodHub for volunteer coordination."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260911-projects" />
   </head>
   <body>
     <header class="site-header">
@@ -43,17 +43,90 @@
           <div>
             <p class="eyebrow">Selected work</p>
             <h1 class="page-title">Product ideas with real implementation detail.</h1>
-            <p class="lead">A focused look at builds that combine frontend polish, backend structure, and practical data flow.</p>
+            <p class="lead">CaseCraft, TableSync, and GoodHub: full-stack builds connecting AI-assisted workflows, collaborative planning, and community.</p>
           </div>
           <a class="back-link" href="index.html">&larr; Back home</a>
         </div>
       </section>
 
-      <section class="page-shell section">
-        <article class="work-card featured">
+      <section class="page-shell section project-list" aria-label="Selected projects">
+        <article class="work-card featured" id="casecraft" aria-labelledby="casecraft-title">
+          <div>
+            <p class="kicker">AI / Jul 2026 &ndash; Present</p>
+            <h2 id="casecraft-title">CaseCraft</h2>
+            <p>
+              A full-stack legal reasoning platform for law students to create case transcripts, choose prosecution
+              or defense roles, and generate structured, AI-assisted arguments.
+            </p>
+            <div class="meta-row" aria-label="CaseCraft stack">
+              <span class="pill acid">Node.js</span>
+              <span class="pill">Express</span>
+              <span class="pill mint">MongoDB</span>
+              <span class="pill">Groq</span>
+              <span class="pill">OpenAI</span>
+            </div>
+            <ul class="clean-list">
+              <li>Built live, speaker-separated transcription from microphone and shared computer audio.</li>
+              <li>Integrated Groq and OpenAI speech-to-text APIs with automatic fallback.</li>
+              <li>Implemented authentication and persistent case management with Clerk, Google OAuth, Node.js, Express, and MongoDB.</li>
+            </ul>
+          </div>
+          <dl class="spec-table">
+            <div>
+              <dt>Audience</dt>
+              <dd>Law students practicing legal reasoning from prosecution and defense perspectives.</dd>
+            </div>
+            <div>
+              <dt>Workflow</dt>
+              <dd>Case transcripts, role selection, and structured AI-assisted arguments.</dd>
+            </div>
+            <div>
+              <dt>Deployment</dt>
+              <dd>Vercel, Render, MongoDB Atlas, and Docker.</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="work-card featured" id="tablesync" aria-labelledby="tablesync-title">
+          <div>
+            <p class="kicker">Full-stack / Jun 2026 &ndash; Present</p>
+            <h2 id="tablesync-title">TableSync</h2>
+            <p>
+              A collaborative meal-planning platform for sharing dietary preferences, voting on menus, and coordinating
+              shopping across seven gathering formats.
+            </p>
+            <div class="meta-row" aria-label="TableSync stack">
+              <span class="pill acid">Next.js</span>
+              <span class="pill">React</span>
+              <span class="pill">TypeScript</span>
+              <span class="pill mint">PostgreSQL</span>
+            </div>
+            <ul class="clean-list">
+              <li>Built constraint-based menu recommendations accounting for dietary restrictions, allergies, preferences, and budgets.</li>
+              <li>Added automatic ingredient scaling and cost-balanced grocery assignments to coordinate group shopping.</li>
+              <li>Implemented persistent rooms and host/guest access controls with PostgreSQL, Prisma, and Better Auth.</li>
+            </ul>
+          </div>
+          <dl class="spec-table">
+            <div>
+              <dt>Planning</dt>
+              <dd>Shared dietary preferences, menu voting, and shopping coordination across seven gathering formats.</dd>
+            </div>
+            <div>
+              <dt>Access</dt>
+              <dd>Persistent rooms with host and guest access controls.</dd>
+            </div>
+            <div>
+              <dt>Testing</dt>
+              <dd>Unit, database integration, and end-to-end tests with Vitest and Playwright.</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="work-card featured" id="goodhub" aria-labelledby="goodhub-title">
           <div>
             <p class="kicker">Hackathon / Mar 2025</p>
-            <h2>GoodHub</h2>
+            <h2 id="goodhub-title">GoodHub</h2>
             <p>
               A full-stack platform connecting volunteers with local and global opportunities. The product supports event
               creation, registration, SQL-backed sync, team challenges, and discussion forums.

@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260911-projects" />
   </head>
   <body class="home-page">
     <header class="site-header home-header">
@@ -140,27 +140,57 @@
         <div class="section-header reveal-card">
           <div>
             <p class="kicker">Projects</p>
-            <h2>Product builds with real data flow.</h2>
+            <h2>AI tools, shared plans, and community.</h2>
           </div>
           <p>
-            Full-stack work focused on clean user paths, stable backend thinking, and enough polish to feel usable.
+            Full-stack projects spanning legal reasoning, collaborative meal planning, and volunteer coordination.
           </p>
         </div>
-        <article class="feature-module module-project reveal-card">
-          <div class="module-top">
-            <span>Project / 02</span>
-            <strong>GoodHub</strong>
-          </div>
-          <p>Full-stack volunteer platform with event creation, registration, SQL-backed sync, and community features.</p>
-          <div class="module-tags">
-            <span>React</span>
-            <span>TypeScript</span>
-            <span>PostgreSQL</span>
-            <span>Node</span>
-          </div>
-          <a class="module-action" href="projects.html">Open project file</a>
-          <div class="signal-meter" aria-hidden="true"><span style="--level: 82%"></span></div>
-        </article>
+        <div class="project-grid">
+          <article class="feature-module module-project project-card reveal-card" aria-labelledby="casecraft-preview">
+            <div class="module-top">
+              <span>Jul 2026 &ndash; Present</span>
+              <h3 id="casecraft-preview">CaseCraft</h3>
+            </div>
+            <p>A legal reasoning platform for law students, with live transcription, prosecution or defense roles, and structured AI-assisted arguments.</p>
+            <div class="module-tags" aria-label="CaseCraft stack">
+              <span>Node.js</span>
+              <span>Express</span>
+              <span>MongoDB</span>
+              <span>Groq</span>
+              <span>OpenAI</span>
+            </div>
+            <a class="module-action" href="projects.html#casecraft">Explore CaseCraft</a>
+          </article>
+          <article class="feature-module module-project project-card reveal-card" aria-labelledby="tablesync-preview">
+            <div class="module-top">
+              <span>Jun 2026 &ndash; Present</span>
+              <h3 id="tablesync-preview">TableSync</h3>
+            </div>
+            <p>A collaborative meal-planning platform for sharing dietary preferences, voting on menus, and coordinating shopping across seven gathering formats.</p>
+            <div class="module-tags" aria-label="TableSync stack">
+              <span>Next.js</span>
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>PostgreSQL</span>
+            </div>
+            <a class="module-action" href="projects.html#tablesync">Explore TableSync</a>
+          </article>
+          <article class="feature-module module-project project-card reveal-card" aria-labelledby="goodhub-preview">
+            <div class="module-top">
+              <span>Mar 2025 / Hackathon</span>
+              <h3 id="goodhub-preview">GoodHub</h3>
+            </div>
+            <p>Full-stack volunteer platform with event creation, registration, SQL-backed sync, and community features.</p>
+            <div class="module-tags" aria-label="GoodHub stack">
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>PostgreSQL</span>
+              <span>Node</span>
+            </div>
+            <a class="module-action" href="projects.html#goodhub">Explore GoodHub</a>
+          </article>
+        </div>
       </section>
 
       <section class="page-shell section home-feature-section" id="experience" data-section="experience">
