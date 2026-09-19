@@ -12,7 +12,7 @@ From the repository root:
 python -m http.server 8769 --bind 127.0.0.1
 ```
 
-Open [the site](http://127.0.0.1:8769/). No build step or npm dependencies are required. Serve the repository root so the existing CaseCraft and GoodHub project links resolve.
+Open [the site](http://127.0.0.1:8769/). No build step or npm dependencies are required.
 
 ## Included
 
@@ -24,7 +24,7 @@ Open [the site](http://127.0.0.1:8769/). No build step or npm dependencies are r
 - Stars, meteors, and aurora background options.
 - One Field Notes entry: **Keeping TableSync in sync.** This remains a draft outline, not a finished or published article. Other outline data is retained for later use.
 - TableSync first in Projects, with its [website](https://table-sync.app/) and an interactive frontend/backend/database architecture walkthrough.
-- CaseCraft and GoodHub open short, static introductions with their purpose and technology stack, using the same dark reading layout as the blog.
+- CaseCraft and GoodHub show their short introductions inline when their plus buttons expand the Projects entries.
 
 Use the mouse wheel, arrow keys, PageUp/PageDown, chapter links, or vertical touch gestures to navigate. The arrow below the sculpture changes its form. The header controls pause motion, switch sky effects, and toggle fullscreen.
 
@@ -40,4 +40,4 @@ These checks exercise geometry, timing, transitions, autorotation, paused and hi
 
 ## Assets and sources
 
-Space Grotesk is bundled under the SIL Open Font License 1.1; see `assets/OFL.txt` and `assets/font-source.txt`. The signature and particle artwork are local assets. TableSync explanations link to the [reviewed source snapshot](https://github.com/pljf/TableSync/tree/b70cd7ab4d333da134e9b38e594a28725e1fdeba). `previews/qq-inspired/DESIGN.md` records the preview's visual conventions and design history.
+Space Grotesk is bundled under the SIL Open Font License 1.1; see `assets/OFL.txt` and `assets/font-source.txt`. The signature and particle artwork are local assets, and the favicon uses the `pl` signature. TableSync explanations link to the [reviewed source snapshot](https://github.com/pljf/TableSync/tree/b70cd7ab4d333da134e9b38e594a28725e1fdeba). `previews/qq-inspired/DESIGN.md` records the preview's visual conventions and design history.
