@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b17">
+  <meta name="description" content="Take TableSync apart. Explore the frontend, server logic, and database behind a collaborative meal-planning app.">
+  <title>Inside TableSync · Patrick Luo</title>
+  <link rel="stylesheet" href="styles.css?v=pl-signature">
+  <link rel="stylesheet" href="tablesync.css?v=pl-signature">
+  <link rel="stylesheet" href="tablesync-scene.css">
+  <script src="aurora.js" defer></script>
+  <script src="ambient.js" defer></script>
+  <script src="tablesync-scene.js" defer></script>
+  <script src="tablesync.js" defer></script>
+</head>
+<body class="project-lab">
+  <a class="skip-link" href="#layer-reader">Skip to the explanation</a>
+  <canvas id="ambient-scene" aria-hidden="true"></canvas>
+  <div class="lab-shade" aria-hidden="true"></div>
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><symbol id="lab-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol><symbol id="lab-external" viewBox="0 0 24 24"><path d="M6 18 18 6M7 6h11v11"/></symbol><symbol id="lab-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol><symbol id="lab-play" viewBox="0 0 24 24"><path d="m9 5 10 7-10 7Z"/></symbol><symbol id="lab-layers" viewBox="0 0 24 24"><path d="m3 8 9-5 9 5-9 5Zm0 4 9 5 9-5M3 16l9 5 9-5"/></symbol></svg>
+  <header class="lab-header">
+    <a class="lab-back" href="index.html#projects"><svg class="icon" aria-hidden="true"><use href="#lab-arrow"/></svg><span>Back to projects</span></a>
+    <a class="lab-signature" href="index.html" aria-label="Patrick Luo, home"><img class="brand-signature" src="assets/pl-signature.svg" width="56" height="44" alt=""></a>
+    <div class="lab-header-actions">
+      <a class="lab-source" href="https://github.com/pljf/TableSync" target="_blank" rel="noopener">GitHub<svg class="icon" aria-hidden="true"><use href="#lab-external"/></svg></a>
+      <button id="lab-motion" class="icon-button" aria-label="Pause animation" aria-pressed="false" title="Pause animation"><svg class="icon" aria-hidden="true"><use href="#lab-pause"/></svg></button>
+    </div>
+  </header>
+  <main class="lab-workspace">
+    <section class="lab-visual" aria-labelledby="project-title">
+      <div class="lab-intro">
+        <h1 id="project-title">TableSync<span>.</span></h1>
+        <p>A shared meal, from the inside out.</p>
+      </div>
+      <div class="lab-object">
+        <div id="architecture-scene" aria-label="Interactive three-layer architecture diagram"></div>
+        <noscript><p class="lab-noscript">The interactive diagram needs JavaScript. Read the project overview or <a href="https://github.com/pljf/TableSync">explore the source on GitHub</a>.</p></noscript>
+      </div>
+      <div class="lab-scene-tools">
+        <p id="scene-hint">Select a layer to look inside.</p>
+        <button class="assembly-toggle" id="assembly-toggle" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#lab-layers"/></svg><span>Assemble</span></button>
+      </div>
+    </section>
+    <section class="lab-reader" id="layer-reader" aria-label="Architecture explanation" tabindex="-1">
+      <div class="layer-tabs" role="tablist" aria-label="Explore the architecture">
+        <button id="tab-overview" role="tab" aria-controls="panel-overview" aria-selected="true" tabindex="0" data-layer="overview">Overview</button>
+        <button id="tab-frontend" role="tab" aria-controls="panel-frontend" aria-selected="false" tabindex="-1" data-layer="frontend">Frontend</button>
+        <button id="tab-backend" role="tab" aria-controls="panel-backend" aria-selected="false" tabindex="-1" data-layer="backend">Backend</button>
+        <button id="tab-database" role="tab" aria-controls="panel-database" aria-selected="false" tabindex="-1" data-layer="database">Database</button>
+      </div>
+      <div class="layer-pages" id="layer-pages">
+        <article class="layer-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
+          <h2>Good company.<br>Less coordination.</h2>
+          <p class="layer-lead">TableSync brings dietary preferences, menu voting, and shared groceries into one room. Here’s how the pieces fit together.</p>
+          <div class="overview-flow" aria-label="The gathering workflow"><span>Gather preferences</span><svg class="icon" aria-hidden="true"><use href="#lab-arrow"/></svg><span>Vote on a menu</span><svg class="icon" aria-hidden="true"><use href="#lab-arrow"/></svg><span>Share the shopping</span></div>
+          <p class="layer-copy">The diagram works like an exploded mechanism. Lift out a layer to see what it does, which tools power it, and how it connects to the rest.</p>
+          <dl class="layer-index">
+            <div><dt><button data-open-layer="frontend"><span>Frontend</span><svg class="icon" aria-hidden="true"><use href="#lab-arrow"/></svg></button></dt><dd>Next.js · React · CSS</dd></div>
+            <div><dt><button data-open-layer="backend"><span>Backend</span><svg class="icon" aria-hidden="true"><use href="#lab-arrow"/></svg></button></dt><dd>Server Actions · Zod · Rules</dd></div>
+            <div><dt><button data-open-layer="database"><span>Database</span><svg class="icon" aria-hidden="true"><use href="#lab-arrow"/></svg></button></dt><dd>PostgreSQL · Prisma</dd></div>
+          </dl>
+          <a class="lab-demo-link" href="https://tablesync-staging.vercel.app/preview" target="_blank" rel="noopener">Try the interactive demo<svg class="icon" aria-hidden="true"><use href="#lab-external"/></svg></a>
+          <p class="demo-footnote">A sample gathering, ready to explore.</p>
+        </article>
+        <article class="layer-panel" id="panel-frontend" role="tabpanel" aria-labelledby="tab-frontend" tabindex="0" hidden></article>
+        <article class="layer-panel" id="panel-backend" role="tabpanel" aria-labelledby="tab-backend" tabindex="0" hidden></article>
+        <article class="layer-panel" id="panel-database" role="tabpanel" aria-labelledby="tab-database" tabindex="0" hidden></article>
+      </div>
+      <div class="layer-navigation"><span id="layer-position">Three layers. One gathering.</span><button id="next-layer"><span>Start exploring</span><svg class="icon" aria-hidden="true"><use href="#lab-arrow"/></svg></button></div>
+    </section>
+  </main>
+  <footer class="lab-footer"><span>Built by Patrick Luo</span><a href="https://github.com/pljf/TableSync/tree/b70cd7ab4d333da134e9b38e594a28725e1fdeba" target="_blank" rel="noopener">Source snapshot <span>b70cd7a</span><svg class="icon" aria-hidden="true"><use href="#lab-external"/></svg></a></footer>
+  <div class="sr-only" id="layer-status" role="status" aria-live="polite"></div>
+</body>
+</html>

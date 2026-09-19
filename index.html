@@ -1,260 +1,128 @@
-<!DOCTYPE html>
-<html class="home-doc" lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Patrick Luo | Portfolio</title>
-    <meta
-      name="description"
-      content="Portfolio for Patrick Luo, a CS student focused on full-stack development, machine learning, and finance analysis."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css?v=20260911-projects" />
-  </head>
-  <body class="home-page">
-    <header class="site-header home-header">
-      <div class="page-shell nav-inner">
-        <a class="brand" href="index.html" aria-label="Patrick Luo home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span>Patrick Luo</span>
-        </a>
-        <nav class="site-nav" aria-label="Primary navigation">
-          <a class="is-active" href="#home" data-section-link="home" aria-current="page">Home</a>
-          <a href="#about" data-section-link="about">About Me</a>
-          <a href="#projects" data-section-link="projects">Projects</a>
-          <a href="#experience" data-section-link="experience">Experience</a>
-          <a href="#skills" data-section-link="skills">Skills</a>
-        </nav>
-        <div class="social-links" aria-label="Contact links">
-          <a href="mailto:patrick.jf.luo@gmail.com">Email</a>
-          <a href="https://github.com/pljf" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/in/patrick-luo-540394292/" target="_blank" rel="noreferrer">LinkedIn</a>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b17">
+  <meta name="description" content="Patrick Luo’s digital space. Notes on code, AI, and turning ideas into things that work.">
+  <title>Patrick Luo · Stay curious</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=single-note">
+  <script src="aurora.js" defer></script>
+  <script src="ambient.js" defer></script>
+  <script src="station-forms.js" defer></script>
+  <script src="observation-forms.js?v=jupiter-2" defer></script>
+  <script src="particles.js?v=jupiter" defer></script>
+  <script src="main.js?v=field-notes" defer></script>
+</head>
+<body class="experience">
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="diagonal" viewBox="0 0 24 24"><path d="m6 18 12-12M6 6h12v12"/></symbol>
+    <symbol id="pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="expand" viewBox="0 0 24 24"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></symbol>
+    <symbol id="down" viewBox="0 0 24 24"><path d="M12 4v15m-6-6 6 6 6-6"/></symbol>
+    <symbol id="spark" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5"/></symbol>
+  </defs></svg>
+  <a class="skip-link" href="#chapter-content">Skip to current chapter</a>
+  <canvas id="ambient-scene" aria-hidden="true"></canvas>
+  <div id="scene-stage" aria-hidden="true"><canvas id="particle-scene"></canvas></div>
+  <div class="scene-tools" aria-label="Particle sculpture">
+    <span id="form-name">Orbital habitat</span>
+    <span id="form-count" aria-label="Form 1 of 3">01 / 03</span>
+    <label class="transition-control" title="Choose a particle transition">
+      <span class="sr-only">Particle transition</span>
+      <select id="transition-mode">
+        <option value="auto">Auto</option>
+        <option value="fluid">Hex</option>
+        <option value="net">Net</option>
+        <option value="orbit">Orbit</option>
+      </select>
+    </label>
+    <button id="next-form" type="button" aria-label="Next particle form" title="Next form · changes automatically every minute"><svg class="icon"><use href="#arrow"/></svg></button>
+  </div>
+  <div class="atmosphere" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Patrick Luo · Home"><img class="brand-signature" src="assets/pl-signature.svg" width="56" height="44" alt=""><span class="brand-word">PATRICK<br>LUO<span class="brand-slash"> / </span>BLOG</span></a>
+    <div class="header-actions">
+      <span class="header-note">Stay curious. Keep growing.</span>
+      <label class="sky-control" title="Choose a sky atmosphere">
+        <svg class="icon" aria-hidden="true"><use href="#spark"/></svg>
+        <span class="sr-only">Sky atmosphere</span>
+        <select id="sky-mode" aria-label="Sky atmosphere">
+          <option value="stars">Stars</option>
+          <option value="meteors">Meteors</option>
+          <option value="aurora" selected>Aurora</option>
+        </select>
+      </label>
+      <button class="icon-button" id="motion-toggle" type="button" aria-label="Pause animation" aria-pressed="false" title="Pause animation"><svg class="icon"><use href="#pause"/></svg></button>
+      <button class="icon-button" id="fullscreen-toggle" type="button" aria-label="Enter fullscreen" title="Enter fullscreen"><svg class="icon"><use href="#expand"/></svg></button>
+    </div>
+  </header>
+  <nav class="chapter-nav" aria-label="Chapter navigation">
+    <a href="#home" class="chapter-dot is-active" aria-label="Home" aria-current="page" data-chapter="0"><span class="dot"></span><span class="nav-label">HOME</span></a>
+    <a href="#writing" class="chapter-dot" aria-label="Journal" data-chapter="1"><span class="dot"></span><span class="nav-label">JOURNAL</span></a>
+    <a href="#projects" class="chapter-dot" aria-label="Projects" data-chapter="2"><span class="dot"></span><span class="nav-label">PROJECTS</span></a>
+    <a href="#about" class="chapter-dot" aria-label="About" data-chapter="3"><span class="dot"></span><span class="nav-label">ABOUT</span></a>
+  </nav>
+  <main id="chapter-content" tabindex="-1">
+    <section class="chapter is-active" id="home" aria-labelledby="home-title">
+      <div tabindex="0" role="region" class="chapter-copy home-copy" aria-label="Introduction">
+        <h1 id="home-title">Stay curious.<br>Keep creating<span class="title-period">.</span></h1>
+        <p class="chapter-english">A MIND IN MOTION.</p>
+        <p class="intro">Ideas in code, AI, and everyday life.<br>A place to explore, build, and share.</p>
+        <a class="line-link" href="#writing">Explore my world <svg class="icon"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>There is more than one shape to an idea.</span></div>
+    </section>
+    <section class="chapter" id="writing" aria-labelledby="writing-title" hidden>
+      <div tabindex="0" role="region" class="chapter-copy journal-copy" aria-label="Journal articles">
+        <h2 id="writing-title">Field notes<span class="title-period">.</span></h2>
+        <p class="journal-deck">On building, learning, <br>and figuring things out.</p>
+        <div class="field-notes">
+          <a class="featured-note" href="article.html?post=tablesync-sync" aria-label="Read draft outline: Keeping TableSync in sync.">
+            <h3>Keeping TableSync in sync.</h3>
+            <p>Rooms, votes, and the decisions behind a shared meal.</p>
+            <span class="note-footer"><span>TableSync · Build notes</span><span class="note-action">Read outline<svg class="icon" aria-hidden="true"><use href="#diagonal"/></svg></span></span>
+          </a>
+          <p class="journal-status">Draft preview · Full article to come.</p>
         </div>
       </div>
-    </header>
-
-    <main>
-      <section class="cinematic-hero" id="home" aria-labelledby="intro-title" data-section="home">
-        <canvas id="hero-canvas" aria-hidden="true"></canvas>
-        <div class="hero-vignette" aria-hidden="true"></div>
-        <div class="hero-scan" aria-hidden="true"></div>
-
-        <div class="page-shell intro-stack">
-          <p class="intro-kicker">Hunter College CS / New York</p>
-          <h1 class="intro-name" id="intro-title">Patrick Luo</h1>
-          <div class="role-line" aria-label="Current focus">
-            <span class="role-prefix">I build as a</span>
-            <span class="typed-role" id="typed-role">Creative Software Developer</span>
-          </div>
-          <p class="intro-copy">
-            CS student shaping full-stack products, ML experiments, and finance analysis into polished, usable systems.
-          </p>
-          <div class="actions intro-actions">
-            <a class="button primary" href="#about" data-scroll-section="about">Enter portfolio</a>
-            <a class="button ghost" href="mailto:patrick.jf.luo@gmail.com">Contact me</a>
-          </div>
+      <div class="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>Observe. Question. Make a note.</span></div>
+    </section>
+    <section class="chapter" id="projects" aria-labelledby="projects-title" hidden>
+      <div tabindex="0" role="region" class="chapter-copy projects-copy" aria-label="Project details">
+        <h2 id="projects-title">Ideas, <br>made real.</h2>
+        <p class="chapter-english">BUILD. LEARN. REPEAT.</p>
+        <div class="project-list">
+          <details open><summary><span>TableSync<small>Planning × Togetherness</small></span><span class="detail-mark" aria-hidden="true"></span></summary><div class="project-body"><p>Dietary preferences, menu voting, and shared shopping tasks. Less coordination, more time around the table.</p><div class="project-links"><a href="https://table-sync.app/" target="_blank" rel="noopener">table-sync.app<svg class="icon" aria-hidden="true"><use href="#diagonal"/></svg></a><a href="tablesync.html">Explore the architecture<svg class="icon" aria-hidden="true"><use href="#diagonal"/></svg></a></div></div></details>
+          <details><summary><span>CaseCraft<small>AI × Legal reasoning</small></span><span class="detail-mark" aria-hidden="true"></span></summary><div class="project-body"><p>A legal reasoning platform for law students, connecting live transcription, role selection, and AI-assisted argument building.</p><a href="projects.html#casecraft" target="_blank" rel="noopener">View project<svg class="icon"><use href="#diagonal"/></svg></a></div></details>
+          <details><summary><span>GoodHub<small>Community × Volunteering</small></span><span class="detail-mark" aria-hidden="true"></span></summary><div class="project-body"><p>Connecting volunteers with opportunities through event sign-ups, team challenges, and community discussions.</p><a href="projects.html#goodhub" target="_blank" rel="noopener">View project<svg class="icon"><use href="#diagonal"/></svg></a></div></details>
         </div>
-
-        <div class="scroll-cue" aria-hidden="true">
-          <span></span>
-          <p>Scroll</p>
-        </div>
-      </section>
-
-      <section class="page-shell section home-feature-section about-section" id="about" data-section="about">
-        <div class="section-header reveal-card">
-          <div>
-            <p class="kicker">About Me</p>
-            <h2>Software engineer, CS student, and systems-minded builder.</h2>
-          </div>
-          <p>
-            A longer introduction to who I am, what I build, and the technical direction I am growing toward.
-          </p>
-        </div>
-        <article class="feature-module module-about reveal-card">
-          <div class="module-top">
-            <span>Profile / 01</span>
-            <strong>Patrick Luo</strong>
-          </div>
-          <div class="about-layout">
-            <figure class="about-portrait">
-              <img src="assets/about-avatar.jpg" alt="Patrick Luo profile image" />
-            </figure>
-            <div class="about-copy">
-              <h3>Computer Science and Mathematics student at Hunter College, CUNY.</h3>
-              <p>
-                I'm Patrick Luo, a student based in New York and graduating in May 2027. My work lives at the
-                intersection of full-stack software, artificial intelligence, and market-focused analysis. I like
-                projects where the interface, data flow, and decision-making logic all have to line up cleanly.
-              </p>
-              <p>
-                I am especially interested in building practical systems around AI and real-world impact: benchmarking
-                model behavior, studying how LLMs reason, making AI tools more reliable and accessible, and turning
-                complex technical ideas into working products. Whether I am writing modular C++, building React
-                applications, connecting APIs, or shaping finance research into concise stories, I care about clarity,
-                usefulness, and execution.
-              </p>
-              <p>
-                Outside the code itself, I enjoy learning from ambitious technical problems, collaborating with people
-                who care about craft, and improving the way I communicate ideas. My long-term goal is to keep growing
-                as an engineer who can move between product, data, AI, and finance without losing attention to detail.
-              </p>
-              <div class="about-grid">
-                <div>
-                  <span>Major</span>
-                  <strong>CS</strong>
-                </div>
-                <div>
-                  <span>Major</span>
-                  <strong>Math</strong>
-                </div>
-                <div>
-                  <span>GPA</span>
-                  <strong>3.6</strong>
-                </div>
-                <div>
-                  <span>Grad Year</span>
-                  <strong>2027</strong>
-                </div>
-              </div>
-              <div class="module-tags">
-                <span>AI/ML</span>
-                <span>Full-stack</span>
-                <span>C++</span>
-                <span>React</span>
-                <span>Real-time APIs</span>
-                <span>Finance Research</span>
-              </div>
-            </div>
-          </div>
-          <div class="signal-meter about" aria-hidden="true"><span style="--level: 78%"></span></div>
-        </article>
-      </section>
-
-      <section class="page-shell section home-feature-section" id="projects" data-section="projects">
-        <div class="section-header reveal-card">
-          <div>
-            <p class="kicker">Projects</p>
-            <h2>AI tools, shared plans, and community.</h2>
-          </div>
-          <p>
-            Full-stack projects spanning legal reasoning, collaborative meal planning, and volunteer coordination.
-          </p>
-        </div>
-        <div class="project-grid">
-          <article class="feature-module module-project project-card reveal-card" aria-labelledby="casecraft-preview">
-            <div class="module-top">
-              <span>Jul 2026 &ndash; Present</span>
-              <h3 id="casecraft-preview">CaseCraft</h3>
-            </div>
-            <p>A legal reasoning platform for law students, with live transcription, prosecution or defense roles, and structured AI-assisted arguments.</p>
-            <div class="module-tags" aria-label="CaseCraft stack">
-              <span>Node.js</span>
-              <span>Express</span>
-              <span>MongoDB</span>
-              <span>Groq</span>
-              <span>OpenAI</span>
-            </div>
-            <a class="module-action" href="projects.html#casecraft">Explore CaseCraft</a>
-          </article>
-          <article class="feature-module module-project project-card reveal-card" aria-labelledby="tablesync-preview">
-            <div class="module-top">
-              <span>Jun 2026 &ndash; Present</span>
-              <h3 id="tablesync-preview">TableSync</h3>
-            </div>
-            <p>A collaborative meal-planning platform for sharing dietary preferences, voting on menus, and coordinating shopping across seven gathering formats.</p>
-            <div class="module-tags" aria-label="TableSync stack">
-              <span>Next.js</span>
-              <span>React</span>
-              <span>TypeScript</span>
-              <span>PostgreSQL</span>
-            </div>
-            <a class="module-action" href="projects.html#tablesync">Explore TableSync</a>
-          </article>
-          <article class="feature-module module-project project-card reveal-card" aria-labelledby="goodhub-preview">
-            <div class="module-top">
-              <span>Mar 2025 / Hackathon</span>
-              <h3 id="goodhub-preview">GoodHub</h3>
-            </div>
-            <p>Full-stack volunteer platform with event creation, registration, SQL-backed sync, and community features.</p>
-            <div class="module-tags" aria-label="GoodHub stack">
-              <span>React</span>
-              <span>TypeScript</span>
-              <span>PostgreSQL</span>
-              <span>Node</span>
-            </div>
-            <a class="module-action" href="projects.html#goodhub">Explore GoodHub</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="page-shell section home-feature-section" id="experience" data-section="experience">
-        <div class="section-header reveal-card">
-          <div>
-            <p class="kicker">Experience</p>
-            <h2>Finance research shaped for decisions.</h2>
-          </div>
-          <p>
-            Concise market writing, chart-backed analysis, and portfolio updates around public equities.
-          </p>
-        </div>
-        <article class="feature-module module-experience reveal-card">
-          <div class="module-top">
-            <span>Experience / 03</span>
-            <strong>Finance Research</strong>
-          </div>
-          <p>LP-ready briefs, equity research, charting, and concise portfolio updates around NVDA and AAPL.</p>
-          <div class="module-tags">
-            <span>NVDA</span>
-            <span>AAPL</span>
-            <span>Charts</span>
-            <span>Storytelling</span>
-          </div>
-          <a class="module-action" href="experience.html">Open research log</a>
-          <div class="signal-meter cyan" aria-hidden="true"><span style="--level: 74%"></span></div>
-        </article>
-      </section>
-
-      <section class="page-shell section home-feature-section" id="skills" data-section="skills">
-        <div class="section-header reveal-card">
-          <div>
-            <p class="kicker">Skills</p>
-            <h2>Engineering toolkit plus analytical range.</h2>
-          </div>
-          <p>
-            C++, React, SQL, data visualization, ML experiments, and structured problem solving.
-          </p>
-        </div>
-        <article class="feature-module module-skills reveal-card">
-          <div class="module-top">
-            <span>Loadout / 04</span>
-            <strong>Technical Toolkit</strong>
-          </div>
-          <p>C++, React, PostgreSQL, JavaScript, data visualization, and structured problem solving.</p>
-          <div class="module-tags">
-            <span>C++</span>
-            <span>React</span>
-            <span>SQL</span>
-            <span>Data Viz</span>
-          </div>
-          <a class="module-action" href="skills.html">Open toolkit</a>
-          <div class="signal-meter rose" aria-hidden="true"><span style="--level: 88%"></span></div>
-        </article>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="page-shell footer-inner">
-        <span>Patrick Luo</span>
-        <span>Full-stack / ML / Finance</span>
       </div>
-    </footer>
-
-    <script src="main.js?v=20260505-entry-about"></script>
-  </body>
+      <div class="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>Every possibility begins with a point.</span></div>
+    </section>
+    <section class="chapter" id="about" aria-labelledby="about-title" hidden>
+      <div tabindex="0" role="region" class="chapter-copy about-copy" aria-label="About Patrick">
+        <h2 id="about-title">Always <br>exploring.</h2>
+        <p class="chapter-english">ALWAYS A WORK IN PROGRESS.</p>
+        <p class="about-intro">Hi, I’m <strong>Patrick Luo.</strong></p>
+        <p class="intro">I study computer science and mathematics in New York. I like software, AI, and turning complex problems into useful things.</p>
+        <p class="education">Hunter College, CUNY<span>CS + Mathematics · 2027</span></p>
+        <a class="line-link" href="mailto:patrick.jf.luo@gmail.com">Let’s make something <svg class="icon"><use href="#diagonal"/></svg></a>
+        <div class="social-links"><a href="https://github.com/pljf" target="_blank" rel="noopener">GitHub<svg class="icon"><use href="#diagonal"/></svg></a><a href="https://www.linkedin.com/in/patrick-luo-540394292/" target="_blank" rel="noopener">LinkedIn<svg class="icon"><use href="#diagonal"/></svg></a></div>
+      </div>
+      <div class="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>Stay connected. Keep looking outward.</span></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-signature">CODE. CREATE. CONNECT.<span>A personal space by Patrick Luo</span></div>
+    <button id="next-chapter" type="button" class="next-chapter"><span class="mouse-mark" aria-hidden="true"><i></i></span><span id="next-label">Scroll to explore</span><svg class="icon"><use href="#down"/></svg></button>
+    <div class="chapter-count"><span id="chapter-number">01</span><span class="count-rule"></span><span>04</span></div>
+  </footer>
+  <div class="chapter-progress" aria-hidden="true"><span id="chapter-progress"></span></div>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  <noscript><style>.chapter[hidden]{display:block!important}.chapter{position:relative;min-height:100vh}.chapter-copy{position:relative;left:auto;top:auto;margin:160px 10% 100px}.experience{overflow:auto}.site-footer,.chapter-nav{display:none}</style></noscript>
+</body>
 </html>
