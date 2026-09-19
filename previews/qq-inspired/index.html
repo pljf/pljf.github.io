@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b17">
+  <meta name="description" content="Patrick Luo’s digital space. Notes on code, AI, and turning ideas into things that work.">
+  <title>Patrick Luo · Stay curious</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=single-note">
+  <script src="aurora.js" defer></script>
+  <script src="ambient.js" defer></script>
+  <script src="station-forms.js" defer></script>
+  <script src="observation-forms.js?v=jupiter-2" defer></script>
+  <script src="particles.js?v=jupiter" defer></script>
+  <script src="main.js?v=field-notes" defer></script>
+</head>
+<body class="experience">
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="diagonal" viewBox="0 0 24 24"><path d="m6 18 12-12M6 6h12v12"/></symbol>
+    <symbol id="pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="expand" viewBox="0 0 24 24"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></symbol>
+    <symbol id="down" viewBox="0 0 24 24"><path d="M12 4v15m-6-6 6 6 6-6"/></symbol>
+    <symbol id="spark" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5"/></symbol>
+  </defs></svg>
+  <a class="skip-link" href="#chapter-content">Skip to current chapter</a>
+  <canvas id="ambient-scene" aria-hidden="true"></canvas>
+  <div id="scene-stage" aria-hidden="true"><canvas id="particle-scene"></canvas></div>
+  <div class="scene-tools" aria-label="Particle sculpture">
+    <span id="form-name">Orbital habitat</span>
+    <span id="form-count" aria-label="Form 1 of 3">01 / 03</span>
+    <label class="transition-control" title="Choose a particle transition">
+      <span class="sr-only">Particle transition</span>
+      <select id="transition-mode">
+        <option value="auto">Auto</option>
+        <option value="fluid">Hex</option>
+        <option value="net">Net</option>
+        <option value="orbit">Orbit</option>
+      </select>
+    </label>
+    <button id="next-form" type="button" aria-label="Next particle form" title="Next form · changes automatically every minute"><svg class="icon"><use href="#arrow"/></svg></button>
+  </div>
+  <div class="atmosphere" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Patrick Luo · Home"><img class="brand-signature" src="assets/pl-signature.svg" width="56" height="44" alt=""><span class="brand-word">PATRICK<br>LUO<span class="brand-slash"> / </span>BLOG</span></a>
+    <div class="header-actions">
+      <span class="header-note">Stay curious. Keep growing.</span>
+      <label class="sky-control" title="Choose a sky atmosphere">
+        <svg class="icon" aria-hidden="true"><use href="#spark"/></svg>
+        <span class="sr-only">Sky atmosphere</span>
+        <select id="sky-mode" aria-label="Sky atmosphere">
+          <option value="stars">Stars</option>
+          <option value="meteors">Meteors</option>
+          <option value="aurora" selected>Aurora</option>
+        </select>
+      </label>
+      <button class="icon-button" id="motion-toggle" type="button" aria-label="Pause animation" aria-pressed="false" title="Pause animation"><svg class="icon"><use href="#pause"/></svg></button>
+      <button class="icon-button" id="fullscreen-toggle" type="button" aria-label="Enter fullscreen" title="Enter fullscreen"><svg class="icon"><use href="#expand"/></svg></button>
+    </div>
+  </header>
+  <nav class="chapter-nav" aria-label="Chapter navigation">
+    <a href="#home" class="chapter-dot is-active" aria-label="Home" aria-current="page" data-chapter="0"><span class="dot"></span><span class="nav-label">HOME</span></a>
+    <a href="#writing" class="chapter-dot" aria-label="Journal" data-chapter="1"><span class="dot"></span><span class="nav-label">JOURNAL</span></a>
+    <a href="#projects" class="chapter-dot" aria-label="Projects" data-chapter="2"><span class="dot"></span><span class="nav-label">PROJECTS</span></a>
+    <a href="#about" class="chapter-dot" aria-label="About" data-chapter="3"><span class="dot"></span><span class="nav-label">ABOUT</span></a>
+  </nav>
+  <main id="chapter-content" tabindex="-1">
+    <section class="chapter is-active" id="home" aria-labelledby="home-title">
+      <div tabindex="0" role="region" class="chapter-copy home-copy" aria-label="Introduction">
+        <h1 id="home-title">Stay curious.<br>Keep creating<span class="title-period">.</span></h1>
+        <p class="chapter-english">A MIND IN MOTION.</p>
+        <p class="intro">Ideas in code, AI, and everyday life.<br>A place to explore, build, and share.</p>
+        <a class="line-link" href="#writing">Explore my world <svg class="icon"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>There is more than one shape to an idea.</span></div>
+    </section>
+    <section class="chapter" id="writing" aria-labelledby="writing-title" hidden>
+      <div tabindex="0" role="region" class="chapter-copy journal-copy" aria-label="Journal articles">
+        <h2 id="writing-title">Field notes<span class="title-period">.</span></h2>
+        <p class="journal-deck">On building, learning, <br>and figuring things out.</p>
+        <div class="field-notes">
+          <a class="featured-note" href="article.html?post=tablesync-sync" aria-label="Read draft outline: Keeping TableSync in sync.">
+            <h3>Keeping TableSync in sync.</h3>
+            <p>Rooms, votes, and the decisions behind a shared meal.</p>
+            <span class="note-footer"><span>TableSync · Build notes</span><span class="note-action">Read outline<svg class="icon" aria-hidden="true"><use href="#diagonal"/></svg></span></span>
+          </a>
+          <p class="journal-status">Draft preview · Full article to come.</p>
+        </div>
+      </div>
+      <div class="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>Observe. Question. Make a note.</span></div>
+    </section>
+    <section class="chapter" id="projects" aria-labelledby="projects-title" hidden>
+      <div tabindex="0" role="region" class="chapter-copy projects-copy" aria-label="Project details">
+        <h2 id="projects-title">Ideas, <br>made real.</h2>
+        <p class="chapter-english">BUILD. LEARN. REPEAT.</p>
+        <div class="project-list">
+          <details open><summary><span>TableSync<small>Planning × Togetherness</small></span><span class="detail-mark" aria-hidden="true"></span></summary><div class="project-body"><p>Dietary preferences, menu voting, and shared shopping tasks. Less coordination, more time around the table.</p><div class="project-links"><a href="https://table-sync.app/" target="_blank" rel="noopener">table-sync.app<svg class="icon" aria-hidden="true"><use href="#diagonal"/></svg></a><a href="tablesync.html">Explore the architecture<svg class="icon" aria-hidden="true"><use href="#diagonal"/></svg></a></div></div></details>
+          <details><summary><span>CaseCraft<small>AI × Legal reasoning</small></span><span class="detail-mark" aria-hidden="true"></span></summary><div class="project-body"><p>A legal reasoning platform for law students, connecting live transcription, role selection, and AI-assisted argument building.</p><a href="../../projects.html#casecraft" target="_blank" rel="noopener">View project<svg class="icon"><use href="#diagonal"/></svg></a></div></details>
+          <details><summary><span>GoodHub<small>Community × Volunteering</small></span><span class="detail-mark" aria-hidden="true"></span></summary><div class="project-body"><p>Connecting volunteers with opportunities through event sign-ups, team challenges, and community discussions.</p><a href="../../projects.html#goodhub" target="_blank" rel="noopener">View project<svg class="icon"><use href="#diagonal"/></svg></a></div></details>
+        </div>
+      </div>
+      <div class="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>Every possibility begins with a point.</span></div>
+    </section>
+    <section class="chapter" id="about" aria-labelledby="about-title" hidden>
+      <div tabindex="0" role="region" class="chapter-copy about-copy" aria-label="About Patrick">
+        <h2 id="about-title">Always <br>exploring.</h2>
+        <p class="chapter-english">ALWAYS A WORK IN PROGRESS.</p>
+        <p class="about-intro">Hi, I’m <strong>Patrick Luo.</strong></p>
+        <p class="intro">I study computer science and mathematics in New York. I like software, AI, and turning complex problems into useful things.</p>
+        <p class="education">Hunter College, CUNY<span>CS + Mathematics · 2027</span></p>
+        <a class="line-link" href="mailto:patrick.jf.luo@gmail.com">Let’s make something <svg class="icon"><use href="#diagonal"/></svg></a>
+        <div class="social-links"><a href="https://github.com/pljf" target="_blank" rel="noopener">GitHub<svg class="icon"><use href="#diagonal"/></svg></a><a href="https://www.linkedin.com/in/patrick-luo-540394292/" target="_blank" rel="noopener">LinkedIn<svg class="icon"><use href="#diagonal"/></svg></a></div>
+      </div>
+      <div class="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>Stay connected. Keep looking outward.</span></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-signature">CODE. CREATE. CONNECT.<span>A personal space by Patrick Luo</span></div>
+    <button id="next-chapter" type="button" class="next-chapter"><span class="mouse-mark" aria-hidden="true"><i></i></span><span id="next-label">Scroll to explore</span><svg class="icon"><use href="#down"/></svg></button>
+    <div class="chapter-count"><span id="chapter-number">01</span><span class="count-rule"></span><span>04</span></div>
+  </footer>
+  <div class="chapter-progress" aria-hidden="true"><span id="chapter-progress"></span></div>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  <noscript><style>.chapter[hidden]{display:block!important}.chapter{position:relative;min-height:100vh}.chapter-copy{position:relative;left:auto;top:auto;margin:160px 10% 100px}.experience{overflow:auto}.site-footer,.chapter-nav{display:none}</style></noscript>
+</body>
+</html>
