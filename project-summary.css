@@ -1,0 +1,12 @@
+.project-summary .reader-shell{max-width:760px;padding-top:clamp(160px,23vh,230px)}
+.project-summary .reader-deck{max-width:32ch;margin-top:18px;font-size:22px;line-height:1.55;color:var(--ink);text-wrap:balance}
+.project-summary-body{max-width:60ch;margin-top:32px;font-size:15px;line-height:1.9;color:var(--soft)}
+.project-summary-stack{margin-top:38px;padding-top:22px;border-top:1px solid var(--line)}
+.project-summary-stack h2{font-size:12px;line-height:1.6;font-weight:500;color:var(--muted)}
+.project-summary-stack p{margin-top:10px;font-size:13px;line-height:1.9;color:var(--soft)}
+@media(max-width:700px){
+  .project-summary .reader-shell{padding-top:145px}
+  .project-summary .reader-deck{font-size:20px;margin-top:16px}
+  .project-summary-body{font-size:14px;margin-top:26px}
+  .project-summary-stack{margin-top:30px;padding-top:20px}
+}

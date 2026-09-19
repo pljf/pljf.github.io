@@ -24,6 +24,7 @@ Open [the preview](http://127.0.0.1:8769/previews/qq-inspired/index.html). No bu
 - Stars, meteors, and aurora background options.
 - One Field Notes entry: **Keeping TableSync in sync.** This remains a draft outline, not a finished or published article. Other outline data is retained for later use.
 - TableSync first in Projects, with its [website](https://table-sync.app/) and an interactive frontend/backend/database architecture walkthrough.
+- CaseCraft and GoodHub open short, static introductions with their purpose and technology stack, using the same dark reading layout as the blog.
 
 Use the mouse wheel, arrow keys, PageUp/PageDown, chapter links, or vertical touch gestures to navigate. The arrow below the sculpture changes its form. The header controls pause motion, switch sky effects, and toggle fullscreen.
 
