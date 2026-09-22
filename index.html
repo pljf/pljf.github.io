@@ -7,13 +7,13 @@
   <meta name="description" content="Patrick Luo’s digital space. Notes on code, AI, and turning ideas into things that work.">
   <title>Patrick Luo · Stay curious</title>
   <link rel="icon" href="assets/favicon.svg?v=pl-signature" type="image/svg+xml" sizes="any">
-  <link rel="stylesheet" href="styles.css?v=20260922-pure-particles">
+  <link rel="stylesheet" href="styles.css?v=single-note">
   <script src="aurora.js" defer></script>
-  <script src="ambient.js?v=20260922-pure-particles" defer></script>
+  <script src="ambient.js" defer></script>
   <script src="station-forms.js" defer></script>
   <script src="observation-forms.js?v=jupiter-2" defer></script>
   <script src="particles.js?v=jupiter" defer></script>
-  <script src="main.js?v=20260922-pure-particles" defer></script>
+  <script src="main.js?v=field-notes" defer></script>
 </head>
 <body class="experience">
   <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
@@ -51,10 +51,9 @@
         <svg class="icon" aria-hidden="true"><use href="#spark"/></svg>
         <span class="sr-only">Sky atmosphere</span>
         <select id="sky-mode" aria-label="Sky atmosphere">
-          <option value="particles" selected>Particles</option>
           <option value="stars">Stars</option>
           <option value="meteors">Meteors</option>
-          <option value="aurora">Aurora</option>
+          <option value="aurora" selected>Aurora</option>
         </select>
       </label>
       <button class="icon-button" id="motion-toggle" type="button" aria-label="Pause animation" aria-pressed="false" title="Pause animation"><svg class="icon"><use href="#pause"/></svg></button>

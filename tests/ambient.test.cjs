@@ -33,14 +33,12 @@ function eventTarget() {
   };
 }
 
-function fixture({ reducedMotion = false, width = 960, height = 640, dpr = 2,
-  startMode = 'particles' } = {}) {
+function fixture({ reducedMotion = false, width = 960, height = 640, dpr = 2 } = {}) {
   let now = 0;
   let frameId = 0;
   const frames = new Map();
   const canvases = [];
-  const calls = { draw: 0, mainDraw: 0, mainImages: 0, imageData: 0, gradient: 0,
-    aurora: 0, auroraDestroy: 0 };
+  const calls = { draw: 0, aurora: 0, auroraDestroy: 0 };
   const auroraOptions = [];
   const media = { ...eventTarget(), matches: reducedMotion };
   media.addListener = listener => media.addEventListener('change', listener);
@@ -57,35 +55,22 @@ function fixture({ reducedMotion = false, width = 960, height = 640, dpr = 2,
     },
   });
   function makeCanvas(main = false) {
-    const painted = [];
     const context = new Proxy({
       createImageData(w, h) {
         assert.ok(Number.isInteger(w) && w > 0 && Number.isInteger(h) && h > 0);
-        calls.imageData++;
         return { width: w, height: h, data: new Uint8ClampedArray(w * h * 4) };
       },
       putImageData(image) {
         assert.equal(image.data.length, image.width * image.height * 4);
         calls.draw++;
       },
-      createLinearGradient(...args) { finite(args); calls.gradient++; return gradient(); },
-      createRadialGradient(...args) { finite(args); calls.gradient++; return gradient(); },
-      fillRect(...args) {
-        finite(args);
-        calls.draw++;
-        if (main) calls.mainDraw++;
-        else painted.push({ x: args[0], y: args[1], alpha: context.globalAlpha });
-      },
-      drawImage(...args) {
-        finite(args);
-        calls.draw++;
-        if (main) { calls.mainDraw++; calls.mainImages++; }
-      },
+      createLinearGradient(...args) { finite(args); return gradient(); },
+      createRadialGradient(...args) { finite(args); return gradient(); },
       measureText(value) { return { width: String(value).length * 8 }; },
     }, {
       get(target, key) {
         if (key in target) return target[key];
-        return (...args) => { finite(args); calls.draw++; if (main) calls.mainDraw++; };
+        return (...args) => { finite(args); calls.draw++; };
       },
       set(target, key, value) {
         if (typeof value === 'number') assert.ok(Number.isFinite(value), `invalid canvas ${String(key)}`);
@@ -99,7 +84,7 @@ function fixture({ reducedMotion = false, width = 960, height = 640, dpr = 2,
       getBoundingClientRect: () => ({ ...rect, left: 0, top: 0, right: rect.width, bottom: rect.height }),
     };
     context.canvas = canvas;
-    canvases.push({ canvas, main, painted });
+    canvases.push({ canvas, main });
     return canvas;
   }
   const canvas = makeCanvas(true);
@@ -143,7 +128,6 @@ function fixture({ reducedMotion = false, width = 960, height = 640, dpr = 2,
   for (const name of ['setChapter', 'setMode', 'setPaused', 'destroy', 'getState']) {
     assert.equal(typeof api[name], 'function', `${name} must be callable`);
   }
-  if (startMode !== 'particles') api.setMode(startMode);
   const f = {
     api, canvas, canvases, calls, auroraOptions, window, document, media,
     state: () => api.getState(),
@@ -194,129 +178,27 @@ function firstMeteor(f) {
   return f.state();
 }
 
-test('particle-only sky renders immediately and diagnostic snapshots are immutable', () => {
+test('default aurora renders immediately and diagnostic snapshots are immutable', () => {
   const f = fixture();
   const state = f.state();
-  assert.equal(state.mode, 'particles');
+  assert.equal(state.mode, 'aurora');
   assert.equal(state.paused, false);
   assert.equal(state.reducedMotion, false);
   assert.equal(state.activeMeteors, 0);
   assert.equal(state.destroyed, false);
   near(state.nextMeteorIn, 1.6);
-  assert.equal(f.canvas.dataset.skyMode, 'particles');
-  assert.equal(f.calls.aurora, 0, 'pure particles must not invoke the aurora renderer');
-  assert.equal(f.calls.imageData, 0, 'pure particles must not rasterize painted clouds');
-  assert.equal(f.calls.gradient, 0, 'pure particles must not create glow or gradient overlays');
-  assert.ok(f.canvases.some(layer => layer.painted.length > 100),
-    'cached background must be composed of individual particle marks');
+  assert.ok(f.calls.aurora > 0, 'aurora is visible before any animation elapses');
   assert.equal(f.pendingFrames, 1);
   assert.ok(Object.isFrozen(state));
   assert.throws(() => { state.mode = 'stars'; }, TypeError);
   assert.throws(() => { state.time = 999; }, TypeError);
-  assert.equal(f.state().mode, 'particles');
+  assert.equal(f.state().mode, 'aurora');
   near(f.state().time, 0);
   f.api.destroy();
 });
 
-test('pure particles keep the reading column and mobile copy area quiet', () => {
-  const density = (f, width, height, x0, x1, y0, y1) => {
-    let opacity = 0;
-    for (const layer of f.canvases.filter(item => !item.main)) {
-      for (const mark of layer.painted) {
-        if (mark.x >= x0 * width && mark.x < x1 * width
-          && mark.y >= y0 * height && mark.y < y1 * height) opacity += mark.alpha;
-      }
-    }
-    return opacity / ((x1 - x0) * (y1 - y0));
-  };
-  const desktop = fixture({ width: 1440, height: 900 });
-  const sculptureSide = density(desktop, 1440, 900, 0.08, 0.63, 0.20, 0.80);
-  const readingSide = density(desktop, 1440, 900, 0.71, 0.96, 0.20, 0.80);
-  assert.ok(sculptureSide > readingSide * 1.6,
-    `desktop copy needs a quieter field: ${sculptureSide} vs ${readingSide}`);
-  desktop.api.destroy();
-
-  const phone = fixture({ width: 390, height: 844, dpr: 4 });
-  const top = density(phone, 390, 844, 0.05, 0.95, 0.10, 0.40);
-  const bottom = density(phone, 390, 844, 0.05, 0.95, 0.62, 0.92);
-  assert.ok(top > bottom * 1.4,
-    `phone copy needs a quieter lower half: ${top} vs ${bottom}`);
-  assert.ok(phone.canvas.width <= Math.ceil(390 * 1.5));
-  phone.api.destroy();
-});
-
-test('pure particle mode immediately clears moving sky effects and never starts meteors', () => {
-  const f = fixture({ startMode: 'aurora' });
-  f.advance(120);
-  assert.ok(f.calls.aurora > 0);
-  firstMeteor(f);
-  f.api.setMode('particles');
-  assert.equal(f.state().activeMeteors, 0);
-  assert.equal(f.canvas.dataset.meteors, '0');
-  const auroraDraws = f.calls.aurora;
-  const cloudRasters = f.calls.imageData;
-  const gradients = f.calls.gradient;
-  f.advance(24000);
-  assert.equal(f.state().activeMeteors, 0);
-  assert.equal(f.calls.aurora, auroraDraws, 'aurora cannot leak into particles mode');
-  assert.equal(f.calls.imageData, cloudRasters, 'particle animation reuses cached dot layers');
-  assert.equal(f.calls.gradient, gradients, 'particle animation never paints glows');
-  assert.equal(f.canvas.dataset.skyMode, 'particles');
-  f.api.setMode('aurora');
-  f.advance(120);
-  assert.ok(f.calls.aurora > auroraDraws, 'legacy aurora remains selectable');
-  f.api.destroy();
-});
-
-test('switching sky material releases inactive backing stores and rebuilds on return', () => {
-  const f = fixture({ width: 1200, height: 800 });
-  const firstParticleLayers = f.canvases.filter(item => !item.main);
-  assert.equal(firstParticleLayers.length, 2);
-  assert.ok(firstParticleLayers.every(item => item.canvas.width > 0));
-
-  f.api.setMode('aurora');
-  assert.ok(firstParticleLayers.every(item => item.canvas.width === 0 && item.canvas.height === 0),
-    'switching to legacy sky must release both full-size particle stores');
-  const legacyLayers = f.canvases.filter(item => !item.main && item.canvas.width > 0);
-  assert.equal(legacyLayers.length, 4);
-  const allocationCount = f.canvases.length;
-  f.api.setMode('meteors');
-  assert.equal(f.canvases.length, allocationCount,
-    'legacy sky variants reuse their existing cached layers');
-
-  f.api.setMode('particles');
-  assert.ok(legacyLayers.every(item => item.canvas.width === 0 && item.canvas.height === 0),
-    'switching to pure particles must release every legacy backing store');
-  assert.ok(f.calls.auroraDestroy > 0, 'the legacy aurora cache is released too');
-  const rebuiltParticles = f.canvases.filter(item => !item.main && item.canvas.width > 0);
-  assert.equal(rebuiltParticles.length, 2);
-  assert.equal(f.canvas.dataset.skyMode, 'particles');
-  f.api.destroy();
-  assert.ok(rebuiltParticles.every(item => item.canvas.width === 0 && item.canvas.height === 0));
-});
-
-test('particle animation stays within its frame cap and reduced motion has a static frame', () => {
-  const f = fixture();
-  const initialImages = f.calls.mainImages;
-  for (let i = 0; i < 60; i++) f.frame(16);
-  const images = f.calls.mainImages - initialImages;
-  assert.ok(images >= 40 && images <= 62,
-    `two cached layers per frame at <=30fps, received ${images} draws in 960ms`);
-  f.api.destroy();
-
-  const reduced = fixture({ reducedMotion: true });
-  assert.equal(reduced.pendingFrames, 0);
-  assert.ok(reduced.calls.mainImages >= 2, 'the static particle field must remain visible');
-  const beforeChapter = reduced.calls.mainImages;
-  reduced.api.setChapter(3);
-  assert.ok(reduced.calls.mainImages > beforeChapter, 'chapter change repaints the static field');
-  reduced.frame(600000);
-  assert.equal(reduced.calls.mainImages, beforeChapter + 2);
-  reduced.api.destroy();
-});
-
 test('meteors naturally arrive after 1.6 seconds, expire, and recur at quiet intervals', () => {
-  const f = fixture({ startMode: 'aurora' });
+  const f = fixture();
   f.advance(1520);
   assert.equal(f.state().activeMeteors, 0, 'no meteor before its first scheduled arrival');
   const first = firstMeteor(f);
@@ -342,7 +224,7 @@ test('meteors naturally arrive after 1.6 seconds, expire, and recur at quiet int
 });
 
 test('pause freezes both an active trail and its next arrival across long clock gaps', () => {
-  const f = fixture({ startMode: 'meteors' });
+  const f = fixture();
   firstMeteor(f);
   f.advance(360);
   f.api.setPaused(true);
@@ -364,7 +246,7 @@ test('pause freezes both an active trail and its next arrival across long clock 
 });
 
 test('hidden-page time consumes neither meteor dwell nor active trail life', () => {
-  const f = fixture({ startMode: 'meteors' });
+  const f = fixture();
   f.advance(800);
   f.hide(true);
   const waiting = f.state();
@@ -389,7 +271,7 @@ test('hidden-page time consumes neither meteor dwell nor active trail life', () 
 });
 
 test('star-only mode clears trails; selecting another sky starts a fresh arrival schedule', () => {
-  const f = fixture({ startMode: 'aurora' });
+  const f = fixture();
   firstMeteor(f);
   f.api.setMode('stars');
   assert.equal(f.state().mode, 'stars');
@@ -412,7 +294,7 @@ test('star-only mode clears trails; selecting another sky starts a fresh arrival
 });
 
 test('initial reduced-motion preference keeps a static aurora and starts no animation loop', () => {
-  const f = fixture({ reducedMotion: true, startMode: 'aurora' });
+  const f = fixture({ reducedMotion: true });
   assert.equal(f.state().reducedMotion, true);
   assert.equal(f.pendingFrames, 0);
   assert.ok(f.calls.aurora > 0, 'motion preference must not remove the chosen aurora entirely');
@@ -437,7 +319,7 @@ test('initial reduced-motion preference keeps a static aurora and starts no anim
 });
 
 test('enabling reduced motion clears moving meteors and repaints a static sky', () => {
-  const f = fixture({ startMode: 'aurora' });
+  const f = fixture();
   firstMeteor(f);
   const before = f.calls.aurora;
   f.motion(true);
@@ -456,7 +338,7 @@ test('enabling reduced motion clears moving meteors and repaints a static sky', 
 });
 
 test('high-density phone resize keeps finite drawing coordinates and bounded backing stores', () => {
-  const f = fixture({ startMode: 'aurora' });
+  const f = fixture();
   const previousLayerCount = f.canvases.length;
   f.resize(390, 844, 4);
   assert.ok(f.canvas.width <= Math.ceil(390 * 1.5));
@@ -480,7 +362,7 @@ test('high-density phone resize keeps finite drawing coordinates and bounded bac
 });
 
 test('destroy releases listeners and frames and rejects subsequent redraw requests', () => {
-  const f = fixture({ startMode: 'aurora' });
+  const f = fixture();
   firstMeteor(f);
   assert.ok(f.listenerCount >= 4);
   f.api.destroy();

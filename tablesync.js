@@ -169,7 +169,7 @@
   motion.addEventListener('click', () => { paused = !paused; syncMotion(); });
   reduced.addEventListener('change', () => { paused = reduced.matches; syncMotion(); });
   document.addEventListener('visibilitychange', syncMotion);
-  window.AmbientScene?.setMode('particles');
+  window.AmbientScene?.setMode('stars');
   window.AmbientScene?.setChapter(2);
   syncMotion();
   selectLayer(location.hash.slice(1), { updateHistory: false, reveal: false });

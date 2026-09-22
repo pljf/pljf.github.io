@@ -132,12 +132,3 @@ html[lang="en"] .intro{letter-spacing:0;line-height:1.9}
   .note-row h3{font-size:13px}.note-footer{font-size:9px;gap:8px 12px}
   .journal-deck br{display:none}.journal-deck{max-width:30ch}
 }
-
-/* Open on a flat navy field; the pure mode draws all visible depth with points. */
-.atmosphere{background:none}
-#ambient-scene[data-sky-mode="stars"] ~ .atmosphere,
-#ambient-scene[data-sky-mode="meteors"] ~ .atmosphere,
-#ambient-scene[data-sky-mode="aurora"] ~ .atmosphere{
-  background:radial-gradient(ellipse at 39% 47%,transparent 15%,#080b1715 52%,#080b1780 100%)
-}
-.reading-page{background:var(--bg)}

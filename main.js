@@ -113,7 +113,6 @@
     window.AmbientScene?.setMode(skyMode.value);
     announcement.textContent = `${skyMode.options[skyMode.selectedIndex].text} atmosphere`;
   });
-  window.AmbientScene?.setMode(skyMode.value);
   const motionButton = document.querySelector('#motion-toggle');
   function updateMotion() {
     document.body.dataset.motionPaused = String(paused);

@@ -1,4 +1,4 @@
-/* A quiet, layered deep-space backdrop. Every static field is cached. */
+/* A quiet, layered deep-space backdrop. All cloud and dust work is cached. */
 (() => {
   'use strict';
 
@@ -20,16 +20,13 @@
     time: 0, chapter: 0, paused: false, destroyed: false,
     pointerX: 0, pointerY: 0, targetX: 0, targetY: 0,
     tone: chapters[0].slice(),
-    mode: 'particles', auroraAmount: 0, nextMeteorIn: 1.6, meteorSequence: 0,
+    mode: 'aurora', auroraAmount: 1, nextMeteorIn: 1.6, meteorSequence: 0,
   };
   let blueCloud = null;
   let violetCloud = null;
   let dustLayer = null;
   let starLayer = null;
   let closeStars = [];
-  let farParticles = null;
-  let filamentParticles = null;
-  let nearParticles = [];
   let meteors = [];
   let frameId = 0;
   let lastFrame = 0;
@@ -75,27 +72,6 @@
     layer.width = Math.ceil(width * ratio);
     layer.height = Math.ceil(height * ratio);
     return layer;
-  }
-
-  function releaseCanvases(...layers) {
-    for (const layer of layers) {
-      if (!layer) continue;
-      // Drop the backing store immediately; a null reference alone waits for GC.
-      layer.width = 0;
-      layer.height = 0;
-    }
-  }
-
-  function releaseLegacyLayers() {
-    releaseCanvases(blueCloud, violetCloud, dustLayer, starLayer);
-    blueCloud = violetCloud = dustLayer = starLayer = null;
-    closeStars = [];
-  }
-
-  function releaseParticleLayers() {
-    releaseCanvases(farParticles, filamentParticles);
-    farParticles = filamentParticles = null;
-    nearParticles = [];
   }
 
   function buildClouds() {
@@ -227,93 +203,8 @@
     }));
   }
 
-  function buildParticles() {
-    const { width, height, dpr, mobile } = state;
-    farParticles = offscreen(width, height, dpr);
-    filamentParticles = offscreen(width, height, dpr);
-    const far = farParticles.getContext('2d');
-    const filaments = filamentParticles.getContext('2d');
-    far.scale(dpr, dpr);
-    filaments.scale(dpr, dpr);
-    nearParticles = [];
-
-    // A thin, almost still field gives the sculpture scale without competing with it.
-    const farCount = mobile ? 230 : 520;
-    for (let i = 0; i < farCount; i++) {
-      const x = random(i * 13 + 31201);
-      const y = random(i * 13 + 31202);
-      const strength = random(i * 13 + 31203);
-      far.globalAlpha = (0.12 + strength * 0.31) * exposure(x, y);
-      far.fillStyle = i % 7 === 0 ? '#a69bca' : '#91aed3';
-      const size = 0.35 + strength * 0.55;
-      far.fillRect(x * width, y * height, size, size);
-    }
-
-    // Broken elliptical streams read as countless particles, never painted mist.
-    // Their openings leave the brightest central shape and the reading column clear.
-    const streamCount = mobile ? 2100 : 5000;
-    const rotation = -0.31;
-    const cosine = Math.cos(rotation), sine = Math.sin(rotation);
-    for (let i = 0; i < streamCount; i++) {
-      const lane = i % 4;
-      const angle = random(i * 17 + 41901) * TAU;
-      const patch = fbm(angle * 2.8 + lane * 9.7, lane * 12.3 + 2.4);
-      if (patch < 0.35 || Math.sin(angle * 3.3 + lane * 1.9) < -0.56) continue;
-      const radiusX = (mobile ? 0.43 : 0.40) + lane * 0.053;
-      const radiusY = (mobile ? 0.22 : 0.25) + lane * 0.038;
-      const scatter = (random(i * 17 + 41902) + random(i * 17 + 41903) - 1)
-        * (0.011 + lane * 0.004);
-      const ellipseX = Math.cos(angle) * (radiusX + scatter);
-      const ellipseY = Math.sin(angle) * (radiusY + scatter * 0.6);
-      const x = (mobile ? 0.50 : 0.43) + ellipseX * cosine - ellipseY * sine;
-      const y = (mobile ? 0.43 : 0.50) + ellipseX * sine + ellipseY * cosine;
-      if (x < 0 || x > 1 || y < 0 || y > 1) continue;
-      const breakage = smooth(0.35, 0.68, patch);
-      const glint = random(i * 17 + 41904);
-      filaments.globalAlpha = (0.035 + glint * 0.125) * breakage * exposure(x, y);
-      filaments.fillStyle = lane % 2 ? '#aea4da' : '#83a8dc';
-      const size = 0.28 + glint * 0.72;
-      filaments.fillRect(x * width, y * height, size, size);
-    }
-
-    const nearCount = mobile ? 15 : 31;
-    for (let i = 0; i < nearCount; i++) {
-      const x = random(i * 19 + 51401);
-      const y = random(i * 19 + 51402);
-      const seed = random(i * 19 + 51403);
-      nearParticles.push({
-        x, y, alpha: (0.27 + seed * 0.4) * exposure(x, y),
-        size: 0.43 + seed * 0.55, phase: seed * TAU,
-        depth: 0.55 + random(i * 19 + 51404) * 0.45,
-      });
-    }
-    far.globalAlpha = filaments.globalAlpha = 1;
-  }
-
-  function drawParticles() {
-    const { width, height, time, pointerX, pointerY, tone } = state;
-    const farX = Math.sin(time * 0.018) * 0.75 + pointerX * 0.4;
-    const farY = Math.cos(time * 0.014) * 0.55 + pointerY * 0.3;
-    context.globalAlpha = 0.72 + tone[1] * 0.22;
-    context.drawImage(farParticles, -3 + farX, -3 + farY, width + 6, height + 6);
-    const streamX = Math.sin(time * 0.031) * 2 + pointerX * 1.8 + tone[2] * 0.35;
-    const streamY = Math.cos(time * 0.027) * 1.5 + pointerY * 1.2 + tone[3] * 0.35;
-    context.globalAlpha = 0.72 + tone[0] * 0.24;
-    context.drawImage(filamentParticles, -7 + streamX, -7 + streamY, width + 14, height + 14);
-    context.fillStyle = '#d5e2fc';
-    for (const particle of nearParticles) {
-      const x = particle.x * width + (pointerX * 4 + Math.sin(time * 0.12 + particle.phase) * 1.2) * particle.depth;
-      const y = particle.y * height + (pointerY * 3 + Math.cos(time * 0.10 + particle.phase) * 0.9) * particle.depth;
-      context.globalAlpha = particle.alpha * (0.90 + Math.sin(time * 0.26 + particle.phase) * 0.10);
-      context.beginPath();
-      context.arc(x, y, particle.size, 0, TAU);
-      context.fill();
-    }
-    context.globalAlpha = 1;
-  }
-
   function advanceMeteors(delta) {
-    if (state.mode === 'stars' || state.mode === 'particles' || motion.matches) return;
+    if (state.mode === 'stars' || motion.matches) return;
     for (const meteor of meteors) meteor.age += delta;
     meteors = meteors.filter(meteor => meteor.age < meteor.life);
     state.nextMeteorIn -= delta;
@@ -335,7 +226,7 @@
   }
 
   function drawMeteors() {
-    if (motion.matches || state.mode === 'stars' || state.mode === 'particles') return;
+    if (motion.matches || state.mode === 'stars') return;
     const {width, height} = state;
     context.save();
     context.globalCompositeOperation = 'screen';
@@ -376,17 +267,10 @@
   }
 
   function draw() {
-    if (state.destroyed || document.hidden
-      || (state.mode === 'particles' ? !farParticles : !blueCloud)) return;
+    if (state.destroyed || document.hidden || !blueCloud) return;
     const { width, height, dpr, time, pointerX, pointerY, tone } = state;
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
     context.clearRect(0, 0, width, height);
-    if (state.mode === 'particles') {
-      drawParticles();
-      canvas.dataset.skyMode = state.mode;
-      canvas.dataset.meteors = '0';
-      return;
-    }
     const driftX = Math.sin(time * 0.025) * 5 + pointerX * 3;
     const driftY = Math.cos(time * 0.021) * 3 + pointerY * 2;
     context.globalCompositeOperation = 'screen';
@@ -469,18 +353,16 @@
     const width = Math.max(1, bounds.width || window.innerWidth);
     const height = Math.max(1, bounds.height || window.innerHeight);
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    if (width === state.width && height === state.height && dpr === state.dpr
-      && (state.mode === 'particles' ? farParticles : blueCloud)) return;
+    if (width === state.width && height === state.height && dpr === state.dpr && blueCloud) return;
     state.width = width;
     state.height = height;
     state.dpr = dpr;
     state.mobile = width <= 1000 && !(width >= 600 && height <= 600);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
-    releaseLegacyLayers();
-    releaseParticleLayers();
-    if (state.mode === 'particles') buildParticles();
-    else { buildClouds(); buildDust(); buildStars(); }
+    buildClouds();
+    buildDust();
+    buildStars();
     draw();
   }
 
@@ -505,21 +387,12 @@
   window.AmbientScene = {
     setMode(mode) {
       if (state.destroyed) return;
-      mode = ['particles', 'stars', 'meteors', 'aurora'].includes(mode) ? mode : 'aurora';
+      mode = ['stars', 'meteors', 'aurora'].includes(mode) ? mode : 'aurora';
       if (mode === state.mode) return;
       state.mode = mode;
       meteors = [];
       state.nextMeteorIn = 1.6;
-      if (mode === 'particles' || state.paused || motion.matches)
-        state.auroraAmount = mode === 'aurora' ? 1 : 0;
-      if (mode === 'particles') {
-        releaseLegacyLayers();
-        window.AuroraLayer?.destroy?.();
-        buildParticles();
-      } else {
-        releaseParticleLayers();
-        if (!blueCloud) { buildClouds(); buildDust(); buildStars(); }
-      }
+      if (state.paused || motion.matches) state.auroraAmount = mode === 'aurora' ? 1 : 0;
       draw(); schedule();
     },
     getState() {
@@ -552,8 +425,8 @@
       document.removeEventListener('visibilitychange', onVisibility);
       if (motion.removeEventListener) motion.removeEventListener('change', onMotion);
       else motion.removeListener(onMotion);
-      releaseLegacyLayers();
-      releaseParticleLayers();
+      blueCloud = violetCloud = dustLayer = starLayer = null;
+      closeStars = [];
       meteors = [];
       window.AuroraLayer?.destroy?.();
       context.clearRect(0, 0, canvas.width, canvas.height);
